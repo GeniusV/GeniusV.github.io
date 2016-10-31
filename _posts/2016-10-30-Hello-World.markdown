@@ -2,7 +2,7 @@
 layout:     post
 title:      "Hello World"
 subtitle:   "Finally..."
-date:       2016-10-29 15:00:00
+date:       2016-10-29
 author:     "GeniusV"
 header-img: "img/post-bg-2015.jpg"
 tags:
