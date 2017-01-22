@@ -11,13 +11,13 @@ tags:
 ---
 
 MySQL 默认字符集为 `latin1 `，可以通过运行命令：
-```sql
+``` sql
 SHOW  variables like '%char%';
 ```
 查看。
 
 运行以下命令来修改默认字符集：
-```sql
+``` sql
 SET character_set_client = utf8 ;
 SET character_set_connection = utf8 ;
 SET character_set_database = utf8 ;
@@ -28,7 +28,7 @@ SET collation_database = utf8 ;
 SET collation_server = utf8 ;
 ```
 如果错误依然存在，运行命令：
-```sql
+``` sql
 ALTER TABLE <TableName>..
   CONVERT TO CHARACTER SET utf8;
 ```

@@ -21,7 +21,7 @@ git config --lis
 ```
 确认 `user.name` 和 `user.email` 存在，若为空，用下面两条语句分别设置用户名和邮箱：
 
-```bash
+``` bash
 git config --global user.name "UserName"
 
 git config --global user.email "example@example.com"
@@ -35,13 +35,13 @@ mkdir .ssh
 
 若文件夹已经存在，备份删除。
 然后：
-```bash
+``` bash
 cd ~/.ssh
 ssh-keygen -t rsa -C "example@example.com"
 ```
 按3次回车。
 添加私钥到ssh：
-```bash
+``` bash
 ssh add id_rda
 ```
 再然后打开`id_rsa.pub`**全部复制**。
@@ -51,7 +51,7 @@ ssh add id_rda
 Done!
 
 测试一下：
-```bash
+``` bash
 ssh git@github.com
 ```
 如果出来:
@@ -62,16 +62,16 @@ ssh git@github.com
 ## 创建远程仓库
 
 如果github上已经有项目的话，先`cd`到项目目录，然后直接：
-```bash
+``` bash
 git clone git@github.com:username/project.git
 ```
 等她下完。
 要创建新的项目，一样先`cd`到项目目录， 然后
-```bash
+``` bash
 git init
 ```
 最后创建远程仓库
-```bash
+``` bash
 git remote add origin https://github.com/username/project.git
 ```
 
@@ -80,12 +80,12 @@ git remote add origin https://github.com/username/project.git
 ## 使用
 
 pull: 
-```bash
+``` bash
 git pull origin master
 ```
 
 push:
-```bash
+``` bash
 git push origin master
 ```
  

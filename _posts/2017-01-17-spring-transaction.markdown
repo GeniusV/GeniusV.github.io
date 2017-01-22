@@ -31,7 +31,7 @@ tags:
 
 #### Demo
 接口：
-```java
+``` java
 public interface BookShopDao {
     public int findBookPriceByID(String id);
     public void updateBookStock(String id);
@@ -39,7 +39,7 @@ public interface BookShopDao {
 }
 ```
 接口实现类：
-```java
+``` java
 @Repository("bookShopDao")
 public class BookShopDaoImpl implements BookShopDao {
     @Autowired
@@ -72,14 +72,14 @@ public class BookShopDaoImpl implements BookShopDao {
 }
 ```
 service类：
-```java
+``` java
 public interface BookShopService {
     public void purchase(String username, String id);
 }
 ```
 
 service类实现：
-```java
+``` java
 @Service("bookShopService")
 public class BookShopServiceImpl implements BookShopService {
     @Autowired
@@ -94,7 +94,7 @@ public class BookShopServiceImpl implements BookShopService {
 }
 ```
 自定义库存异常：
-```java
+``` java
 public class BookStockException extends RuntimeException {
     public BookStockException(String message) {
         super(message);
@@ -103,7 +103,7 @@ public class BookStockException extends RuntimeException {
 ```
 
 自定义钱不够异常：
-```java
+``` java
 public class UserAccountException extends RuntimeException {
     public UserAccountException(String message) {
         super(message);

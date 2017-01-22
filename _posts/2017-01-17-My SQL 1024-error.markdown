@@ -43,7 +43,7 @@ WHERE User = 'root';
   ```
   123456 为密码.
   5.7以下版本在 MySQL concole 运行：
-  ```sql
+  ``` sql
   UPDATE mysql.user SET Password=PASSWORD('123456') WHERE User='root';
   ```
   因为我没有用过5.7以下的版本，所以密码过期问题请自行 Google。
