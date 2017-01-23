@@ -16,7 +16,8 @@ tags:
 ## NamedParameterJDBCTemplate
 
 若有多个参数，则不用对应位置， 直接对应参数名。缺点时是麻烦  
-DEMO：  
+DEMO：     
+
 ``` java
 @Test
     public void testNamedParameterJDBCTemplate(){
@@ -28,3 +29,4 @@ DEMO：
         namedParameterJdbcTemplate.update(sql, paraMap);
     }
 ```
+
