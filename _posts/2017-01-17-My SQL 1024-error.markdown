@@ -12,38 +12,50 @@ tags:
 ---
 System: mac os 10.12.2  
 刚装好 MySQL 的时候会弹框告诉你初始的root密码。但是那个密码登过一次之后有可能会过期，出现错误： 
+
 ```
 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password)
 ```
+
 这时候我们要重置root密码并设置密码永不过期。
 
 ## 解决方案
 - 先在 Preference 中停止 MySQL 服务。
 - 获取管理员权限，Terminal 运行命令：  
+
 ```
 sudo su
 ```
+
 - 安全模式启动MySQL，Terminal 运行命令：  
-```
+
+``` bash
 /usr/local/mysql/bin/mysqld_safe --skip-grant-tables &
 ```
+
 - **在另外一个 Terminal 窗口**  
   **在另外一个 Terminal 窗口**  
   **在另外一个 Terminal 窗口**  
   运行：  
+  
   ```
   /usr/local/mysql/bin/mysql -u root
   ```
+  
 - 改密码  
   5.7版本在 MySQL concole 运行：
+  
   ```sql
 UPDATE mysql.user
 SET authentication_string = PASSWORD('123456') , password_expired = 'N'
 WHERE User = 'root';
   ```
+  
   123456 为密码.
   5.7以下版本在 MySQL concole 运行：
+  
   ``` sql
   UPDATE mysql.user SET Password=PASSWORD('123456') WHERE User='root';
   ```
+  
   因为我没有用过5.7以下的版本，所以密码过期问题请自行 Google。
