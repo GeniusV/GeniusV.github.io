@@ -4,7 +4,7 @@ SEOTitle: GeniusV
 header-img: img/blog-photo.jpg
 email: eilot310100@outlook.com
 description: "Nothing to discribe."
-keyword: "Java, Spring, 后端"
+keyword: "Java"
 url: "https://GeniusV.github.io"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
@@ -77,7 +77,7 @@ sidebar-avatar: /img/account-img.jpg     # use absolute URL, seeing it's used in
 
 # Featured Tags
 featured-tags: true                     # whether or not using Feature-Tags
-featured-condition-size: 2              # A tag will be featured if the size of it is more than this condition value
+featured-condition-size: 1              # A tag will be featured if the size of it is more than this condition value
 
 
 
