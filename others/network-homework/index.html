@@ -1,0 +1,347 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>markdownToc</title>
+    <link rel="stylesheet" type="text/css" href="./markdownToc_files/github2-rightpart.css" media="all">
+    <link rel="stylesheet" type="text/css" href="./markdownToc_files/github1-contents.css">
+    <link rel="stylesheet" href="./markdownToc_files/zTreeStyle.css" type="text/css">
+    <style>
+        .ztree li a.curSelectedNode {
+            padding-top: 0px;
+            background-color: #FFE6B0;
+            color: black;
+            height: 16px;
+            border: 1px #FFB951 solid;
+            opacity: 0.8;
+        }
+        .ztree{
+            overflow: auto;
+            height:100%;
+            min-height: 200px;
+            top: 0px;
+        }
+    </style>
+</head>
+<body style="">
+    <div>
+        <div style="width:30%;">
+            <ul id="tree" class="ztree" style="width: 260px; overflow: auto; position: fixed; z-index: 2147483647; border: 0px none; left: 0px; bottom: 0px;">
+            </ul>
+        </div>
+        <div id="readme" style="width:70%;margin-left:25%;">
+            <!-- ***********************************************************CUT****************************************************************** --> 
+            <article class="markdown-body">
+
+<h1 id="toc_0">Chapter 3</h1>
+
+<h2 id="toc_1">3.1 数据链路(即逻辑链路)与链路(即物理链路)有何区别，电路接通与数据链路接通有何区别</h2>
+
+<p>（1）数据链路与链路的区别在于数据链路除链路外，还必须有一些必要的规程来控制数据的传输。因此，数据链路比链路多了实现通信规程所需要的硬件和软件。（2）“电路接通了”表示链路两端的结点交换机已经开机，物理连接已经能够传送比特流了。但是，数据传输并不可靠。在物理连接基础上，再建立数据链路连接，才是“数据链路接通了”。此后，由于数据链路连接具有检测、确认和重传等功能，才使不太可靠的物理链路变成可靠的数据链路，进行可靠的数据传输。当数据链路断开连接时，物理电路连接不一定跟着断开连接。   </p>
+
+<p>电路接通主要是电流通过导线、控制期器件、使电器工作的连接导通，数据连接信号数据线接收传送电路是很广义的说法，数据链路是数据通信里特指的，范畴大不同。数据链路通常也是电路（严格说光信号或电信号），数据链路接通表示数据的传输通道已正常建立，电路通了数据链路不一定通。两者之间最大区别是电路接通是可以直观看到或测量，而数据链路接通是非直观的只能通过数据传送接收。</p>
+
+<h2 id="toc_2">3.3 网络适配器（网卡）的作用是什么，工作在哪一层</h2>
+
+<p>工作在数据链路层和物理层，在数据链路层负责CSMA/CD协议，在物理层负责将数据转化成0101数字信搜索号</p>
+
+<h2 id="toc_3">3.6 PPP协议的主要特点是什么？为什么PPP不使用帧的编号？PPP适用于什么情况？为什么PPP协议不能使数据链路层实现可靠传输？</h2>
+
+<p>主要特点：<br>
+（1） 点对点协议，既支持异步链路，也支持同步链路。<br>
+（2） PPP是面向字节的。<br>
+PPP不采用序号和确认机制是出于以下的考虑：<br>
+第一， 若使用能够实现可靠传输的数据链路层协议（如HDLC），开销就要增大。在数据链路层出现差错的概率不大时，使用比较简单的PPP协议较为合理。<br>
+第二， 在因特网环境下，PPP的信息字段放入的数据是IP数据报。假定我们采用了能实现可靠传输但十分复杂的数据链路层协议，然而当数据帧在路由器中从数据链路层上升到网络层后，  仍有可能因网络授拥塞而被丢弃。因此，数据链路层的可靠传输并不能保证网络层的传输也是可靠的。<br>
+第三， PPP协议在帧格式中有帧检验序列FCS安段。对每一个收到的帧，PPP都要使用硬件进行CRC检验。若发现有差错，则丢弃该帧（一定不能把有差错的帧交付给上一层）。端到端的差  错检测最后由高层协议负责。因此，PPP协议可保证无差错接受。<br>
+PPP协议适用于用户使用拨号电话线接入因特网的情况。  </p>
+
+<h2 id="toc_4">3.7 要发送的数据为1101011011.采用CRC的生成多项式是P（X）=（X的4次方）+X+1</h2>
+
+<ol>
+<li>试求应添加在数据后面的余数R</li>
+<li>若数据在传输过程中最后2个1变成0,问接收端能否发现</li>
+<li>采用CRC检验后,数据链路层的传输是否变成了可靠的传输<br></li>
+</ol>
+
+<p>P（X）=（X的4次方）+X+1 = 10011.1101011011除以10011=1110（R）<br>
+2.若最后两个成为0,则1101011000 1110 ,11010110001110除以10011=100 得余 100,不为0,故判断数据出错.<br>
+3,采用crc检验后,收方将丢掉此数据,所以只采用crc检验而没有ppp重传机制,数据链路层的传输还不是可靠传输.  </p>
+
+<h2 id="toc_5">3.8 要发送数据为101110,采用CRC生成多项式是P(x)=x4+x+1,添加在数据后面的余数</h2>
+
+<p><img src="http://h.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=461fc212a144ad342eea8f81e09220cc/a8ec8a13632762d0203fc440a0ec08fa503dc6c8.jpg" alt=""></p>
+
+<h2 id="toc_6">3.9 一个PPP帧的数据部分（用十六进制写出）是7D 5E FE 27 7D 5D 7D 5D 65 7D 5E。试问真正的数据是什么</h2>
+
+<p>当信息字段中出现和标志字段一样的比特0x7E时，就必须采取一些措施。因PPP协议是面向字符型的，所以它不能采用HDLC所使用的零比特插入法，而是使用一种特殊的字符填充。具体的  做法是将信息字段中出现的每一个0x7E字节转变成2字节序列（0x7D，0x5E）。若信息字段中出现一个0x7D的字节，则将其转变成2字节序列（0x7D，0x5D）。若信息字段中出现ASCII码的控制字符，则在该字符前面要加入一个0x7D字节。这样做的目的是防止这些表面上的ASCII码控制字符被错误地解释为控制字符。<br>
+真正的16进制数据是7E FE 27 7D 7D 65 7E  </p>
+
+<h2 id="toc_7">3.12 PPP协议的工作状态有哪几种？当用户要使用PPP协议和ISP建立连接进行通信需要建立哪几种连接？每一种连接解决什么问题？ </h2>
+
+<p>答：PPP协议的工作状态有：链路静止、链路建立、鉴别、网络层协议、链路打开、链路终止状态。 <br>
+使用PPP协议和ISP建立连接进行通信需要建立的连接有：物理链路建立，其目的是建立链路层的LCP连接；LCP链路建立，LCP开始协商一些配置选项，即发送LCP的配置请求帧，如最大帧  长、鉴别协议等；逻辑链路建立，先进行身份鉴别，成功后进入网络层协议状态，PPP两端的网络控制协议NCP根据网络层的不同协议互相交换网络层特定的网络控制分组，如IP控制协议分配IP地址，之后就可以进行数据传输了。  </p>
+
+<h2 id="toc_8">3.14 常用的局域网的网络拓扑有哪些种类？现在最流行的是哪种结构？为什么早期的以太网选择总线拓扑结构而不是星形拓扑结构，但现在却改为使用星形拓扑结构？ </h2>
+
+<p>答：星形网、总线网、环形网、树形网。现在最流行的网络拓扑是星形拓扑结构。 <br>
+    当时很可靠的星形拓扑结构较贵，人们都认为无源的总线结构更加可靠，但实践证明，连接有大量站点的总线式以太网很容易出现故障，而现在专用ASIC芯片的使用可以使星形结构的  集线器做的非常可靠，因此现在的以太网一般都使用星形结构的拓扑。</p>
+
+<h2 id="toc_9">3.18 试说明10BASE-T中的“10”、“BASE”和“T”所代表的意思。 </h2>
+
+<p>答：10BASE-T中的“10”表示10Mb/s的数据率，“BASE”表示连接线上的信号是基带信号，“T”代表双绞线，但10BASE-T的通信距离稍短，每个站到集线器的距离不超过100m。    </p>
+
+<h2 id="toc_10">3.19  以太网使用的CSMA/CD协议是以争用方式接入到共享信道。这与传统的时分复用TDM相比优缺点如何？ </h2>
+
+<p>答：传统的时分复用TDM是静态时隙分配，高负荷时信道利用率高，低负荷或负荷不均匀时资源浪费较大；CSMA/  CD可动态使用空闲新到资源，低负荷时信道利用率高，但控制复杂，高负荷时信道冲突大。  </p>
+
+<h2 id="toc_11">3.27 有10个站连接到以太网上。试计算一下三种情况下每一个站所能得到的带宽。 </h2>
+
+<p>（1）10个站都连接到一个10Mb/s以太网集线器； <br>
+（2）10个站都连接到一个100Mb/s以太网集线器； <br>
+（3）10个站都连接到一个10Mb/s以太网交换机。   </p>
+
+<p>答：（1）10个站都连接到一个10Mb/s以太网集线器：10个站共享10Mb/s   <br>
+ （2）10个站都连接到一个100Mb/s以太网集线器：10个站共享100Mb/s    <br>
+（3）10个站都连接到一个10Mb/s以太网交换机：每一个站独站10Mb/s  </p>
+
+<h2 id="toc_12">3.29 以太网交换机有何特点？用它怎样组成虚拟局域网？ </h2>
+
+<p>答：以太网交换机则为链路层设备，可实现透明交换虚拟局域网。VLAN 是由一些局域网网段构成的与物理位置无关的逻辑组，这些网段具有某些共同的需求。 <br>
+虚拟局域网协议允许在以太网的帧格式中插入一个 4 字节的标识符，称为 VLAN 标记(tag)，用来指明发送该帧的工作站属于哪一个虚拟局域网。  </p>
+
+<h1 id="toc_13">Chapter 4</h1>
+
+<h2 id="toc_14">4.4 说明下列协议的作用：IP,ARP,RARP,ICMP</h2>
+
+<p>IP协议（Internet Protocol，因特网协议），属于OSI7层参考模型中的网络层协议。它提供两个基本功能：寻址和分段。寻址即常说的路由功能；分段是指对数据包的大小进行重新组装，以适应不同网络对包大小的要求。</p>
+
+<p>ARP协议（Address Resolution Protocol，地址解析协议），属于IPv4协议簇，工作在数据链路层。其功能是将IP地址解析为对应的MAC地址。</p>
+
+<p>RARP协议（Reverse ARP，反向ARP协议），其功能是将MAC地址解析为对应的IP地址。</p>
+
+<p>ICMP协议（Internet Control Message Protocol，Internet控制消息协议），它的功能是无法传送的数据包的错误，并帮助对这些错误进行疑难解答。</p>
+
+<h2 id="toc_15">4.5 IP地址分为几类,各如何表示,IP地址的主要特点是什么</h2>
+
+<p>按照类来分，有5类：<br>
+A类：前8位为网络号，后24位为主机号，网络号首位为0。(32位的二进制)<br>
+B类：前16位为网络号，后16位为主机号，网络号前两位为10。<br>
+C类：前24位为网络号，后8位为主机号，网络号前三位为110。<br>
+D类：前4位为1110，后面28位是多播组号。<br>
+E类：前5位为11110，后面27位保留。<br>
+其中ABC类为网络单播地址，D类为组播地址。E类保留留待后用。<br>
+主要特点是唯一性。  </p>
+
+<h2 id="toc_16">4.7 试说明IP地址和硬件地址的区别。为什么要使用这两种不同的地址？</h2>
+
+<p>IP地址和硬件地址的区别：<br>
+⑴IP地址放IP数据报的首部，而硬件地址则放在MAC帧的首部；<br>
+⑵在网络层和网络层以上使用IP地址，数据链路层及以下使用硬件地址。为什么要使用这两种不同的地址，是因为在因特网上，是使用IP地址独一无二的标识每个主机（或路由器），但在发送数据时，使用IP地址的IP数据报向下要交给数据链路层，被封装成MAC帧，而MAC帧在具体的物理网络（如局域网）中传送时使用的是物理地址。连接在通信链路上的设备（主机或路由器）在接收MAC帧时，其根据是MAC帧首部中的硬件地址。只有在剥去MAC帧首部和尾部后将MAC层的数据上交给网络层，网络层才能在IP数据报中找到源IP地址和目的IP地址。</p>
+
+<h2 id="toc_17">4.9</h2>
+
+<p>（1）子网掩码为255.255.255.0代表什么意思？<br>
+有三种含义<br>
+其一是一个A类网的子网掩码，对于A类网络的IP地址，前8位表示网络号，<br>
+后24位表示主机号，使用子网掩码255.255.255.0表示前8位为网络号，中间16位用于子网段的划分，最后8位为主机号。<br>
+第二种情况为一个B类网，对于B类网络的IP地址，前16位表示网络号，<br>
+后16位表示主机号，使用子网掩码255.255.255.0表示前16位为网络号，中间8位用于子网段的划分，最后8位为主机号。<br>
+第三种情况为一个C类网，这个子网掩码为C类网的默认子网掩码。<br>
+（2）一网络的现在掩码为255.255.255.248，问该网络能够连接多少个主机？<br>
+255.255.255.248即11111111.11111111.11111111.11111000.<br>
+每一个子网上的主机为(2^3)=6 台<br>
+掩码位数29，该网络能够连接8个主机，扣除全1和全0后为6台。<br>
+（3）一A类网络和一B网络的子网号subnet-id分别为16个1和8个1，问这<br>
+两个子网掩码有何不同？<br>
+A类网络：11111111 11111111 11111111  00000000<br>
+给定子网号（16位“1”）则子网掩码为255.255.255.0<br>
+B类网络 11111111 11111111 11111111  00000000<br>
+给定子网号（8位“1”）则子网掩码为255.255.255.0但子网数目不同<br>
+（4）一个B类地址的子网掩码是255.255.240.0。试问在其中每一个子网上的主<br>
+机数最多是多少？<br>
+（240）10=（128+64+32+16）10=（11110000）2<br>
+Host-id的位数为4+8=12，因此，最大主机数为：<br>
+2^12-2=4096-2=4094<br>
+11111111.11111111.11110000.00000000 主机数2^12-2<br>
+(5)一A类网络的子网掩码为255.255.0.255；它是否为一个有效的子网掩码？<br>
+是 10111111  11111111 00000000 11111111<br>
+(6)某个IP地址的十六进制表示C2.2F.14.81，试将其转化为点分十进制的形式。这个地址是哪一类IP地址？<br>
+C2 2F 14 81&ndash;(12<em>16+2).(2</em>16+15).(16+4).(8*16+1)&mdash;194.47.20.129 C2 2F 14 81 &mdash;  11000010.00101111.00010100.10000001<br>
+C类地址<br>
+(7)C类网络使用子网掩码有无实际意义？为什么？<br>
+有实际意义.C类子网IP地址的32位中,前24位用于确定网络号,后8位用于确定主机号.如果划分子网,可以选择后8位中的高位,这样做可以进一步划分网络,并且不增加路由表的内容,但是代价是主机数相信减少.  </p>
+
+<h2 id="toc_18">4.10 试辨认以下IP地址的网络类别。</h2>
+
+<p>（1）128.36.199.3 （2）21.12.240.17 （3）183.194.76.253<br>
+（4）192.12.69.248 （5）89.3.0.1 （6）200.3.6.2<br>
+(2)和(5)是A类,(1)和(3)是B类,(4)和(6)是C类.  </p>
+
+<h2 id="toc_19">4.11. IP数据报中的首部检验和并不检验数据报中的数据。这样做的最大好处是什么？坏处是什么？</h2>
+
+<p>在首部中的错误比在数据中的错误更严重，例如，一个坏的地址可能导致分组被投寄到错误的主机。许多主机并不检查投递给他们的分组是否确实是要投递给它们，它们假定网络从来不会把  本来是要前往另一主机的分组投递给它们。 数据不参与检验和的计算，因为这样做代价大，上层协议通常也做这种检验工作，从前，从而引起重复和多余。<br>
+因此，这样做可以加快分组的转发，但是数据部分出现差错时不能及早发现。   </p>
+
+<h2 id="toc_20">4.15. 什么是最大传送单元MTU？它和IP数据报的首部中的哪个字段有关系？</h2>
+
+<p>答：IP层下面数据链里层所限定的帧格式中数据字段的最大长度，与IP数据报首部中的总长度字段有关系  </p>
+
+<h2 id="toc_21">4.16. 在因特网中将IP数据报分片传送的数据报在最后的目的主机进行组装。还可以有另一种做法，即数据报片通过一个网络就进行一次组装。是比较这两种方法的优劣。</h2>
+
+<p>在目的站而不是在中间的路由器进行组装是由于：<br>
+（1）路由器处理数据报更简单些；效率高，延迟小。<br>
+（2）数据报的各分片可能经过各自的路径。因此在每一个中间的路由器进行组装可能总会缺少几个数据报片；<br>
+（3）也许分组后面还要经过一个网络，它还要给这些数据报片划分成更小的片。如果在中间的路由器进行组装就可能会组装多次。<br>
+（为适应路径上不同链路段所能许可的不同分片规模，可能要重新分片或组装）  </p>
+
+<h2 id="toc_22">4.18. （1）有人认为：“ARP协议向网络层提供了转换地址的服务，因此ARP应当属于数据链路层。”这种说法为什么是错误的？</h2>
+
+<p>因为ARP本身是网络层的一部分，ARP协议为IP协议提供了转换地址的服务，数据链路层使用硬件地址而不使用IP地址，无需ARP协议数据链路层本身即可正常运行。因此ARP不再数据链路层  。<br>
+（2）试解释为什么ARP高速缓存每存入一个项目就要设置10~20分钟的超时计时器。这个时间设置的太大或太小会出现什么问题？<br>
+答：考虑到IP地址和Mac地址均有可能是变化的（更换网卡，或动态主机配置）   10－20分钟更换一块网卡是合理的。超时时间太短会使ARP请求和响应分组的通信量太频繁，而超时时间太长会使更换网卡后的主机迟迟无法和网络上的其他主机通信。<br>
+（3）至少举出两种不需要发送ARP请求分组的情况（即不需要请求将某个目的IP地址解析为相应的硬件地址）。<br>
+在源主机的ARP高速缓存中已经有了该目的IP地址的项目；源主机发送的是广播分组；源主机和目的主机使用点对点链路。  </p>
+
+<h2 id="toc_23">4.20.设某路由器建立了如下路由表：</h2>
+
+<p>目的网络 子网掩码 下一跳 128.96.39.0 255.255.255.128 接口m0<br>
+128.96.39.128 255.255.255.128 接口m1<br>
+128.96.40.0 255.255.255.128 R2<br>
+192.4.153.0 255.255.255.192 R3<br>
+*（默认） —— R4<br>
+现共收到5个分组，其目的地址分别为：<br>
+（2）128.96.40.12<br>
+（5）192.4.153.90  </p>
+
+<p>（2）分组的目的IP地址为：128.96.40.12。<br>
+① 与子网掩码255.255.255.128相与得128.96.40.0，不等于128.96.39.0。 ② 与子网掩码255.255.255.128相与得128.96.40.0，经查路由表可知，该项分组经R2转发。  </p>
+
+<p>（5）分组的目的IP地址为：192.4.153.90，与子网掩码255.255.255.128相与后得192.4.153.0。与子网掩码255.255.255.192相与后得192.4.153.64，经查路由表知，该分组转发  选择默认路由，经R4转发。  </p>
+
+<h2 id="toc_24">4.21 某单位分配到一个B类IP地址，其net-id为129.250.0.0.该单位有4000台机器，分布在16个不同的地点。如选用子网掩码为255.255.255.0，试给每一个地点分配一个子网掩  码号，并算出每个地点主机号码的最小值和最大值</h2>
+
+<p>4000/16=250，平均每个地点250台机器。如选255.255.255.0为掩码，则每个网络所连主机数=28-2=254&gt;250，共有子网数=28-2=254&gt;16，能满足实际需求。 可给每个地点分配如下子网号码<br>
+地点：   </p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left">子网号（subnet-id） </th>
+<th style="text-align: left">子网网络号   </th>
+<th style="text-align: left">主机IP的最小值和最大值 </th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left">1：    00000001      </td>
+<td style="text-align: left">     129.250.1.0   </td>
+<td style="text-align: left">   129.250.1.1&mdash;129.250.1.254   </td>
+</tr>
+<tr>
+<td style="text-align: left">2：    00000010      </td>
+<td style="text-align: left">     129.250.2.0   </td>
+<td style="text-align: left">   129.250.2.1&mdash;129.250.2.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">3：    00000011      </td>
+<td style="text-align: left">     129.250.3.0   </td>
+<td style="text-align: left">   129.250.3.1&mdash;129.250.3.254</td>
+</tr>
+<tr>
+<td style="text-align: left">4：    00000100      </td>
+<td style="text-align: left">     129.250.4.0   </td>
+<td style="text-align: left">   129129.250.4.1&mdash;129.250.4.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">5：    00000101      </td>
+<td style="text-align: left">     129.250.5.0   </td>
+<td style="text-align: left">   129.250.5.1&mdash;129.250.5.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">6：    00000110      </td>
+<td style="text-align: left">     129.250.6.0   </td>
+<td style="text-align: left">   129.250.6.1&mdash;129.250.6.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">7：    00000111      </td>
+<td style="text-align: left">     129.250.7.0   </td>
+<td style="text-align: left">   129.250.7.1&mdash;129.250.7.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">8：    00001000      </td>
+<td style="text-align: left">     129.250.8.0   </td>
+<td style="text-align: left">   129.250.8.1&mdash;129.250.8.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">9：    00001001      </td>
+<td style="text-align: left">     129.250.9.0   </td>
+<td style="text-align: left">   129.250.9.1&mdash;129.250.9.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">10：  00001010       </td>
+<td style="text-align: left">    129.250.10.0   </td>
+<td style="text-align: left">   129.250.10.1&mdash;129.250.10.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">11：  00001011       </td>
+<td style="text-align: left">    129.250.11.0   </td>
+<td style="text-align: left">   129.250.11.1&mdash;129.250.11.254</td>
+</tr>
+<tr>
+<td style="text-align: left">12：  00001100       </td>
+<td style="text-align: left">    129.250.12.0   </td>
+<td style="text-align: left">   129.250.12.1&mdash;129.250.12.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">13：  00001101       </td>
+<td style="text-align: left">    129.250.13.0   </td>
+<td style="text-align: left">   129.250.13.1&mdash;129.250.13.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">14：  00001110       </td>
+<td style="text-align: left">    129.250.14.0   </td>
+<td style="text-align: left">129.250.14.1&mdash;129.250.14.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">15：  00001111       </td>
+<td style="text-align: left">    129.250.15.0   </td>
+<td style="text-align: left">129.250.15.1&mdash;129.250.15.254 </td>
+</tr>
+<tr>
+<td style="text-align: left">16：  00010000       </td>
+<td style="text-align: left">    129.250.16.0   </td>
+<td style="text-align: left">129.250.16.1&mdash;129.250.16.254</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_25">4.25. 以下有4个子网掩码。哪些是不推荐使用的？为什么？</h2>
+
+<p>（1）176.0.0.0，（2）96.0.0.0，（3）127.192.0.0，（4）255.128.0.0。 只有（4）是连续的1和连续的0的掩码，是推荐使用的  </p>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+
+</article>
+            <!-- ***********************************************************CUT***************************************************************** -->
+        </div>
+    </div>
+    <script src="./markdownToc_files/jquery-1.10.2.min.js"></script>
+    <script src="./markdownToc_files/jquery.ztree.all-3.5.min.js"></script>
+    <script src="./markdownToc_files/jquery.ztree_toc.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#tree').ztree_toc({
+                is_auto_number:false,
+                documment_selector:'.markdown-body',
+                is_expand_all: true
+            });
+        });
+    </script>
+</body>
+</html>
