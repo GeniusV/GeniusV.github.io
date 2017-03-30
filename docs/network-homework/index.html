@@ -320,6 +320,71 @@ C类地址<br>
 
 <p>（1）176.0.0.0，（2）96.0.0.0，（3）127.192.0.0，（4）255.128.0.0。 只有（4）是连续的1和连续的0的掩码，是推荐使用的  </p>
 
+<h2 id="toc_26">4.28. 已知路由器R1的路由表如表4—12所示。</h2>
+
+<p>表4-12 习题4-28中路由器R1的路由表   </p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left">地址掩码</th>
+<th style="text-align: left">目的网络地址</th>
+<th style="text-align: left">下一跳地址</th>
+<th style="text-align: left">路由器接口</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left">/26</td>
+<td style="text-align: left">140.5.12.64</td>
+<td style="text-align: left">180.15.2.5</td>
+<td style="text-align: left">m2</td>
+</tr>
+<tr>
+<td style="text-align: left">/24</td>
+<td style="text-align: left">130.5.8.0</td>
+<td style="text-align: left">190.16.6.2</td>
+<td style="text-align: left">m1</td>
+</tr>
+<tr>
+<td style="text-align: left">/16</td>
+<td style="text-align: left">110.71.0.0</td>
+<td style="text-align: left">„„</td>
+<td style="text-align: left">m0</td>
+</tr>
+<tr>
+<td style="text-align: left">/16</td>
+<td style="text-align: left">180.15.0.0</td>
+<td style="text-align: left">„„</td>
+<td style="text-align: left">m2</td>
+</tr>
+<tr>
+<td style="text-align: left">/16</td>
+<td style="text-align: left">196.16.0.0</td>
+<td style="text-align: left">„„</td>
+<td style="text-align: left">m1</td>
+</tr>
+<tr>
+<td style="text-align: left">默认</td>
+<td style="text-align: left">默认</td>
+<td style="text-align: left">110.71.4.5</td>
+<td style="text-align: left">m0</td>
+</tr>
+</tbody>
+</table>
+
+<p>试画出个网络和必要的路由器的连接拓扑，标注出必要的IP地址和接口。对不能确定的情应该指明。<br>
+<img src="markdownToc_files/img/4-28.jpg" alt=""></p>
+
+<h2 id="toc_27">4.30. 一个大公司有一个总部和三个下属部门。公司分配到的网络前缀是192.77.33/24.公司的网络布局如图4-56示。总部共有五个局域网，其中的LAN1-LAN4都连接到路由器R1上，R1再通过LAN5与路由器R5相连。R5和远地的三个部门的局域网LAN6～LAN8通过广域网相连。每一个局域网旁边标明的数字是局域网上的主机数。试给每一个局域网分配一个合适的网络的前缀。</h2>
+
+<p><img src="markdownToc_files/img/4-30.jpeg" alt=""></p>
+
+<h2 id="toc_28">4.33. 下面的前缀中的哪一个和地址152.7.77.159及152.31.47.252都匹配？请说明理由。 </h2>
+
+<p>（1）152.40/13；（2）153.40/9；（3）152.64/12；（4）152.0/11。  前缀（4）和这两个地址都匹配  </p>
+
 
 
 <script type="text/javascript">
