@@ -821,6 +821,122 @@ C类地址<br>
 
 <p>（1）152.40/13；（2）153.40/9；（3）152.64/12；（4）152.0/11。  前缀（4）和这两个地址都匹配  </p>
 
+<h2 id="toc_29">4.35. 已知地址块中的一个地址是140.120.84.24/20。试求这个地址块中的最小地址和最大地址。地址掩码是什么？地址块中共有多少个地址？相当于多少个C类地址？</h2>
+
+<p>140.120.84.24 è 140.120.(0101 0100).24<br>
+最小地址是 140.120.(0101 0000).0/20 (80) 最大地址是 140.120.(0101 1111).255/20 (95) 地址数是4096.相当于16个C类地址。  </p>
+
+<h2 id="toc_30">4.40. RIP使用UDP，OSPF使用IP，而BGP使用TCP。这样做有何优点？为什么RIP周期性地和临站交换路由器由信息而BGP却不这样做？</h2>
+
+<p>RIP只和邻站交换信息，使用UDP无可靠保障，但开销小，可以满足RIP要求； OSPF使用可靠的洪泛法，直接使用IP，灵活、开销小；<br>
+BGP需要交换整个路由表和更新信息，TCP提供可靠交付以减少带宽消耗；   RIP使用不保证可靠交付的UDP，因此必须不断地（周期性地）和邻站交换信息才能使路由信息及时得到更新。但BGP使用保证可靠交付的TCP因此不需要这样做。  </p>
+
+<h2 id="toc_31">4.42. 假定网络中的路由器A的路由表有如下的项目（格式同上题）：</h2>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left">N1</td>
+<td style="text-align: left">4</td>
+<td style="text-align: left">B</td>
+</tr>
+<tr>
+<td style="text-align: left">N2</td>
+<td style="text-align: left">2</td>
+<td style="text-align: left">C</td>
+</tr>
+<tr>
+<td style="text-align: left">N3</td>
+<td style="text-align: left">1</td>
+<td style="text-align: left">F</td>
+</tr>
+<tr>
+<td style="text-align: left">N4</td>
+<td style="text-align: left">5</td>
+<td style="text-align: left">G</td>
+</tr>
+</tbody>
+</table>
+
+<p>现将A收到从C发来的路由信息（格式同上题）：  </p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left">N1</td>
+<td style="text-align: left">2</td>
+</tr>
+<tr>
+<td style="text-align: left">N2</td>
+<td style="text-align: left">1</td>
+</tr>
+<tr>
+<td style="text-align: left">N3</td>
+<td style="text-align: left">3</td>
+</tr>
+<tr>
+<td style="text-align: left">N4</td>
+<td style="text-align: left">7</td>
+</tr>
+</tbody>
+</table>
+
+<p>试求出路由器A更新后的路由表（详细说明每一个步骤）。<br>
+路由器A更新后的路由表如下：  </p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left">N1</td>
+<td style="text-align: left">3</td>
+<td style="text-align: left">C</td>
+<td style="text-align: left">不同的下一跳，距离更短，改变</td>
+</tr>
+<tr>
+<td style="text-align: left">N2</td>
+<td style="text-align: left">2</td>
+<td style="text-align: left">C</td>
+<td style="text-align: left">不同的下一跳，距离一样，不变</td>
+</tr>
+<tr>
+<td style="text-align: left">N3</td>
+<td style="text-align: left">1</td>
+<td style="text-align: left">F</td>
+<td style="text-align: left">不同的下一跳，距离更大，不改变</td>
+</tr>
+<tr>
+<td style="text-align: left">N4</td>
+<td style="text-align: left">5</td>
+<td style="text-align: left">G</td>
+<td style="text-align: left">无新信息，不改变</td>
+</tr>
+</tbody>
+</table>
+
 
 
 <script type="text/javascript">
