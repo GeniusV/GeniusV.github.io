@@ -309,7 +309,29 @@ hellen:x:500:
 ### id   
 格式：id  [用户名]  
 功能：查看用户的UID、GID和用户所属组群的信息。如果不指定用户，则显示当前用户的相关信息。  
-  
+
+## 批量新建多个用户帐号
+1. 编辑用户信息文件，如user。  
+1. 创建用户口令文件，如pword。  
+1. 利用`newusers<用户信息文件`命令批量创建用户帐号。 
+
+    ``` bash
+    newusers< user  
+    ```
+
+1. 利用`pwunconv`命令暂时取消shadow加密。  
+
+    ``` bash
+    Password   un   Convention（约定）  
+    ```
+
+1. 利用`chpasswd<用户口令文件`命令为用户设置口令。
+
+    ``` bash
+    chpasswd < pword  
+    ```
+
+1. 利用`pwconv`命令恢复shadow加密。  
   
 ## 管理组群的Shell命令  
   
