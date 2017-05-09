@@ -526,18 +526,18 @@ pre[class*="language-"] {
 
 <p>注销－－退出登录状态。注销一个用户不影响其他登录用户的操作。 </p>
 
-<div><pre><code class="language-bash">$exit
-$logout
-$Ctrl+D</code></pre></div>
+<div><pre><code class="language-bash">exit
+logout
+Ctrl+D</code></pre></div>
 
 <h2 id="toc_4">重启</h2>
 
-<div><pre><code class="language-bash">$reboot
+<div><pre><code class="language-bash">reboot
 #shutdown  –r  now</code></pre></div>
 
 <h2 id="toc_5">关机（不是简单地关闭电源 ）</h2>
 
-<div><pre><code class="language-bash">$halt
+<div><pre><code class="language-bash">halt
 #shutdown  –h  now
 #shutdown  –h  10
 The system is going DOWN for system halt in 10 minutes</code></pre></div>
@@ -553,11 +553,11 @@ The system is going DOWN for system halt in 10 minutes</code></pre></div>
 bash利用“|”符号可实现管道功能。<br>
 [例15] 利用管道统计当前目录下的文件和子目录的数目。</p>
 
-<div><pre><code class="language-bash">$ls  |wc  -l</code></pre></div>
+<div><pre><code class="language-bash">ls  |wc  -l</code></pre></div>
 
 <p>思考题：分页显示/etc目录中文件和子目录的详细信息。  </p>
 
-<div><pre><code class="language-bash">$ls  -l  /etc|more</code></pre></div>
+<div><pre><code class="language-bash">ls  -l  /etc|more</code></pre></div>
 
 <h1 id="toc_7">Linux下文件和目录的颜色的含义</h1>
 
@@ -908,12 +908,12 @@ hellen:x:500:  </code></pre></div>
 [例6] 删除jerry用户帐号及其主目录。<br>
 查看普通用户个人主目录信息  </p>
 
-<div><pre><code class="language-bash">#ls /home  
+<div><pre><code class="language-bash">ls /home  
 # userdel  -r jerry  </code></pre></div>
 
 <p>验证结果  </p>
 
-<div><pre><code class="language-bash">#ls /home  </code></pre></div>
+<div><pre><code class="language-bash">ls /home  </code></pre></div>
 
 <h3 id="toc_30">su</h3>
 
@@ -926,15 +926,32 @@ hellen:x:500:  </code></pre></div>
 <p>格式：id  [用户名]<br>
 功能：查看用户的UID、GID和用户所属组群的信息。如果不指定用户，则显示当前用户的相关信息。  </p>
 
-<h2 id="toc_32">管理组群的Shell命令</h2>
+<h2 id="toc_32">批量新建多个用户帐号</h2>
 
-<h3 id="toc_33">groupadd</h3>
+<ol>
+<li>编辑用户信息文件，如user。<br></li>
+<li>创建用户口令文件，如pword。<br></li>
+<li><p>利用<code>newusers&lt;用户信息文件</code>命令批量创建用户帐号。 </p>
+
+<div><pre><code class="language-bash">newusers&lt; user  </code></pre></div></li>
+<li><p>利用<code>pwunconv</code>命令暂时取消shadow加密。  </p>
+
+<div><pre><code class="language-bash">Password   un   Convention（约定）  </code></pre></div></li>
+<li><p>利用<code>chpasswd&lt;用户口令文件</code>命令为用户设置口令。</p>
+
+<div><pre><code class="language-bash">chpasswd &lt; pword  </code></pre></div></li>
+<li><p>利用<code>pwconv</code>命令恢复shadow加密。  </p></li>
+</ol>
+
+<h2 id="toc_33">管理组群的Shell命令</h2>
+
+<h3 id="toc_34">groupadd</h3>
 
 <p>格式：groupadd  [选项]  组群名<br>
 功能：新建组群，超级用户命令。<br>
 主要选项说明：-g  组群ID   指定GID  </p>
 
-<h3 id="toc_34">groupmod</h3>
+<h3 id="toc_35">groupmod</h3>
 
 <p>格式：groupmod   [选项]  组群名<br>
 功能：修改指定组群属性，超级用户命令。<br>
@@ -942,15 +959,15 @@ hellen:x:500:  </code></pre></div>
 -g    组群ID                 指定GID<br>
 -n  组群名（name）       指定组群名  </p>
 
-<h3 id="toc_35">groupdel</h3>
+<h3 id="toc_36">groupdel</h3>
 
 <p>格式：groupdel  组群名<br>
  功能：删除指定的组群，超级用户命令。<br>
 注：在删除指定组群之前必须保证该组群不是任何用户的主要组群，否则需要首先删除那些以此组群作为主要组群的用户才能删除这个组群。  </p>
 
-<h1 id="toc_36">进程管理与系统监视</h1>
+<h1 id="toc_37">进程管理与系统监视</h1>
 
-<h2 id="toc_37">启动进程与作业</h2>
+<h2 id="toc_38">启动进程与作业</h2>
 
 <ul>
 <li>进程与作业的启动方式
@@ -967,34 +984,34 @@ at调度、batch调度和cron调度。</li>
 </ul></li>
 </ul>
 
-<h2 id="toc_38">作业的前后台切换</h2>
+<h2 id="toc_39">作业的前后台切换</h2>
 
-<h3 id="toc_39">bg (background)</h3>
+<h3 id="toc_40">bg (background)</h3>
 
 <p>格式：bg  [作业号]<br>
 功能：将前台作业切换到后台运行。若没有指定作业号，则将当前作业切换到后台。  </p>
 
-<h3 id="toc_40">fg（Foreground）</h3>
+<h3 id="toc_41">fg（Foreground）</h3>
 
 <p>格式：fg  [作业号]<br>
 功能：将后台作业切换到前台运行。若没有指定作业号，则将后台作业序列中的第一个作业切换到前台运行。  </p>
 
-<h2 id="toc_41">管理进程与作业的Shell命令</h2>
+<h2 id="toc_42">管理进程与作业的Shell命令</h2>
 
-<h3 id="toc_42">jobs</h3>
+<h3 id="toc_43">jobs</h3>
 
 <p>格式：jobs  [选项]<br>
 功能：显示当前所有的作业。<br>
 主要选项说明：-p（process）、-l（list）    </p>
 
-<h3 id="toc_43">ps（Process Status）</h3>
+<h3 id="toc_44">ps（Process Status）</h3>
 
 <p>格式：ps  [选项]<br>
 功能：显示进程的状态。无选项时显示当前用户在当前终端启动的进程。<br>
 主要选项说明：<br>
 -a（all）、-e、-l（list）、-u（user）、-x、-t    </p>
 
-<h4 id="toc_44">ps输出</h4>
+<h4 id="toc_45">ps输出</h4>
 
 <ul>
 <li>S（State）状态列<br>
@@ -1017,7 +1034,7 @@ at调度、batch调度和cron调度。</li>
 <li>TIME已运行时间<br></li>
 </ul>
 
-<h3 id="toc_45">kill</h3>
+<h3 id="toc_46">kill</h3>
 
 <p>格式1：kill  [选项]  进程号<br>
 格式2：kill  %  作业号<br>
@@ -1025,7 +1042,7 @@ at调度、batch调度和cron调度。</li>
 主要选项说明：- 9    强行终止指定进程。<br>
 终止正在运行中进程Ctrl+C   </p>
 
-<h3 id="toc_46">进程的优先级</h3>
+<h3 id="toc_47">进程的优先级</h3>
 
 <ul>
 <li>Linux中所有的进程根据其所处状态，按照时间顺序排列形成不同的队列。系统按一定的策略进行调度执行队列中的进程。<br></li>
@@ -1034,24 +1051,24 @@ at调度、batch调度和cron调度。</li>
 <li>Linux中进程优先级的取值范围为-20~19之间的整数，取值越低，优先级越高，默认为0。<br></li>
 </ul>
 
-<h3 id="toc_47">nice</h3>
+<h3 id="toc_48">nice</h3>
 
 <p>格式：nice  [-优先级值]  命令<br>
 功能：指定将启动的进程的优先级。不指定优先级值时，将优先级设置为10。   </p>
 
-<h3 id="toc_48">renice</h3>
+<h3 id="toc_49">renice</h3>
 
 <p>格式：renice  优先级值  参数<br>
 功能：修改运行中的进程的优先级，设定指定用户或组群的进程优先级。<br>
 主要参数说明：-p  进程号、-u  用户名、-g  组群号    </p>
 
-<h2 id="toc_49">进程调度</h2>
+<h2 id="toc_50">进程调度</h2>
 
 <p>Linux允许用户根据需要在指定的时间自动运行指定的进程，也允许用户将非常消耗资源和时间的进程安排到系统比较空闲的时间来执行。<br>
 - 对于偶尔运行的进程采用at或batch调度。<br>
 - 对于特定时间重复运行的进程采用cron调度。   </p>
 
-<h3 id="toc_50">at调度</h3>
+<h3 id="toc_51">at调度</h3>
 
 <p>格式：at  [选项]  时间<br>
 功能：设置指定时间执行的指定的命令。<br>
@@ -1060,25 +1077,25 @@ at调度、batch调度和cron调度。</li>
 时间表示：绝对（HH:MM，AM/PM）、相对（now+时间间隔，单位minutes,hours,day,week）、直接计时法（today,tomorrow,midnight,noon,teatime[4点]）<br>
 [例8] 在3分钟后向登录在系统上的所有用户发送“Good”信息。  </p>
 
-<div><pre><code class="language-bash">$at now+mintues  
+<div><pre><code class="language-bash">at now+mintues  
 at&gt;who  
 at&gt;wall Good  
 Ctrl+D  </code></pre></div>
 
 <p>注：who执行结果送入邮箱，用mail查看。  </p>
 
-<h3 id="toc_51">batch调度</h3>
+<h3 id="toc_52">batch调度</h3>
 
 <p>格式：batch  [选项]  [时间]<br>
 功能：与at命令几乎相同一样，唯一的区别是如果不指定运行时间，进程将在系统较空闲时运行。batch调度适合于时间上要求不高，但运行时占用系统资源较多的工作。batch命令  的选项与at命令相同。</p>
 
-<h3 id="toc_52">cron</h3>
+<h3 id="toc_53">cron</h3>
 
 <p>at调度和batch调度中指定的命令只能执行一次。<br>
 但在实际的系统管理中有些命令需要在指定的日期和时间重复执行，例如每天例行要做的数据备份。cron调度正可以满足这种需求。<br>
 cron调度与crond进程、crontab命令和crontab配置文件有关。  </p>
 
-<h4 id="toc_53">crontab配置文件</h4>
+<h4 id="toc_54">crontab配置文件</h4>
 
 <ul>
 <li><p>保存cron调度的内容，共6个字段，从左到右依次为：  </p>
@@ -1112,7 +1129,7 @@ cron调度与crond进程、crontab命令和crontab配置文件有关。  </p>
 <li><p>用户的crontab配置文件保存于/var/spool/cron目录中，其文件名与用户名相同。  </p></li>
 </ul>
 
-<h4 id="toc_54">crontab</h4>
+<h4 id="toc_55">crontab</h4>
 
 <p>格式：crontab  [选项]<br>
 功能：维护用户的crontab配置文件。<br>
@@ -1120,11 +1137,11 @@ cron调度与crond进程、crontab命令和crontab配置文件有关。  </p>
 -e（edit）、-l（list）、-r（erase）<br>
 [例9]xufqin用户创建一个新的crontab配置文件。  </p>
 
-<div><pre><code class="language-bash">$ crontab –e   </code></pre></div>
+<div><pre><code class="language-bash"> crontab –e   </code></pre></div>
 
 <p>系统自动将xufqin（与用户同名）文件挂载到/var/spool/cron下  </p>
 
-<h4 id="toc_55">crond进程</h4>
+<h4 id="toc_56">crond进程</h4>
 
 <p>crond进程在系统启动时自动启动，并一直运行于后台。<br>
 crond进程负责检测crontab配置文件，并按照其设置内容，定期重复执行指定的cron调度工作。   </p>
@@ -1137,50 +1154,50 @@ crond进程负责检测crontab配置文件，并按照其设置内容，定期�
 
 <p><img src="markdownToc_files/img/crond-2.png" alt=""></p>
 
-<h4 id="toc_56">查看crontab结果</h4>
+<h4 id="toc_57">查看crontab结果</h4>
 
 <ul>
 <li>查看crontab</li>
 </ul>
 
-<div><pre><code class="language-bash">$ crontab –l   或
-$ cat /var/spool/cron/xufqin </code></pre></div>
+<div><pre><code class="language-bash"> crontab –l   或
+ cat /var/spool/cron/xufqin </code></pre></div>
 
 <ul>
 <li>查看crontab执行结果</li>
 </ul>
 
-<div><pre><code class="language-bash">$ mail
-$ cat 文件名（若输出重定向）
-$ man mail</code></pre></div>
+<div><pre><code class="language-bash"> mail
+ cat 文件名（若输出重定向）
+ man mail</code></pre></div>
 
-<h2 id="toc_57">系统监视</h2>
+<h2 id="toc_58">系统监视</h2>
 
-<h3 id="toc_58">桌面环境下监视系统</h3>
+<h3 id="toc_59">桌面环境下监视系统</h3>
 
 <p>「主菜单」=&gt;「系统工具」=&gt;「系统监视器」<br>
 可实现对CPU、硬盘、内存和交换分区的实时监视 </p>
 
-<h3 id="toc_59">实施系统监视的Shell命令</h3>
+<h3 id="toc_60">实施系统监视的Shell命令</h3>
 
-<h4 id="toc_60">who</h4>
+<h4 id="toc_61">who</h4>
 
 <p>格式：who  [选项]<br>
 功能：查看当前已登录的所有用户。<br>
 主要选项说明：-m、-H（heading）  </p>
 
-<h4 id="toc_61">top</h4>
+<h4 id="toc_62">top</h4>
 
 <p>格式：top  [-d  秒数]<br>
 功能：动态显示CPU利用率、内存利用率和进程状态等相关信息，是目前使用最广泛的实时系统性能监视程序。默认每5秒钟更新显示信息，而“-d  秒数”选项可指定刷新频率。  </p>
 
-<h4 id="toc_62">free</h4>
+<h4 id="toc_63">free</h4>
 
 <p>格式：free  [选项]<br>
 功能：显示内存和交换分区的相关信息。<br>
 主要选项说明：-m、-t（total）、-s  秒数  </p>
 
-<h2 id="toc_63">系统日志管理</h2>
+<h2 id="toc_64">系统日志管理</h2>
 
 <ul>
 <li>系统日志记录着系统运行的详细信息。<br></li>
@@ -1193,20 +1210,870 @@ $ man mail</code></pre></div>
 <li>「主菜单」=&gt;「系统工具」=&gt;「系统日志」<br></li>
 </ul>
 
-<h1 id="toc_64">命令</h1>
+<h1 id="toc_65">文件系统</h1>
 
-<h2 id="toc_65">date</h2>
+<h2 id="toc_66">Linux的基本文件系统</h2>
+
+<p>ext（Extended File System）文件系统系列，ext、ext2和ext3，是专为Linux设计的文件系统。继承UNIX文件系统的主要特点：  </p>
+
+<ul>
+<li>三级索引结构<br></li>
+<li>目录树型结果<br></li>
+<li>设备作特别文件处理<br></li>
+</ul>
+
+<p>ext3与ext2相比：  </p>
+
+<ul>
+<li>高实用性<br></li>
+<li>数据的完整性<br></li>
+<li>更快的速度<br></li>
+<li>方便的数据转换<br></li>
+</ul>
+
+<h2 id="toc_67">Linux支持的文件系统</h2>
+
+<p>Linux采用虚拟文件系统技术，可支持多种常见的文件系统，并允许用户在不同的磁盘分区上安装不同的文件系统。   Linux支持的其它文件系统类型主要有：  </p>
+
+<ul>
+<li>msdos：MS DOS采用的FAT文件系统。<br></li>
+<li>vfat：Windows中通用的文件系统。<br></li>
+<li>sysV：UNIX中最常用的system V文件系统。<br></li>
+<li>nfs：网络文件系统（Network File System）。<br></li>
+<li>iso9660：CD-ROM的标准文件系统。<br></li>
+</ul>
+
+<h2 id="toc_68">Windows支持的文件系统</h2>
+
+<ul>
+<li>FAT（File Allocation Table ，文件分配表   ）：由微软发明并拥有部分专利的文档系统，供MS-DOS使用，也是所有非NT内核的微软视窗操作系统所使用的文件系统。<br>
+
+<ul>
+<li>FAT 16<br></li>
+<li>FAT 32<br></li>
+</ul></li>
+<li>NTFS：(New Technology File System)新技术文件系统<br></li>
+<li>CDFS：(Compact Disc File System) 光盘文件系统 </li>
+</ul>
+
+<h2 id="toc_69">文件系统的挂载与卸载</h2>
+
+<ul>
+<li>挂载就是将存储介质的内容映射到指定的目录中，此目录即为该设备的挂载点。<br>
+
+<ul>
+<li>硬盘上的各个磁盘分区都会在启动过程中自动挂载到指定的目录，并在关机时自动卸载。<br></li>
+<li>移动存储介质既可以在启动时自动挂载，也可以在需要时手动挂载/卸载。<br></li>
+</ul></li>
+<li>文件系统的挂载记载在/etc/fstab文件中。<br></li>
+</ul>
+
+<div><pre><code class="language-bash">cat /etc/fstab  </code></pre></div>
+
+<p><img src="markdownToc_files/img/file-system-fstab.png" alt=""></p>
+
+<ul>
+<li>sys文件系统：将系统中的设备组织成层次结构，并向用户程序提供详细的内核数据结构信息。<br>
+
+<ul>
+<li>block目录：块设备。bus目录： 总线类型。class目录：   设备类型。devices目录：系统中所有设备按设备挂载的总线类型组成层次结构。<br></li>
+</ul></li>
+<li>devpts文件系统：针对虚拟终端的。<br></li>
+<li>proc文件系统：系统专用，只存在于内存；借助虚拟文件系统，实现系统信息窗（动态从内核读取信息）<br>
+
+<ul>
+<li>数字（PID）命名目录：系统运行中进程目录<br></li>
+<li>bus、fs、ide、scsi、net、sys、tty……等信息<br></li>
+</ul></li>
+<li>tmp文件系统：虚拟内存（物理内存+交换分区）文件系统，大小随文件的复制和创建而增减，最大是物理内存+交换分区。<br></li>
+</ul>
+
+<h3 id="toc_70">关于挂载的注意事项</h3>
+
+<ul>
+<li>挂载点是目录，该目录必须存在<br>
+
+<ul>
+<li>若空最好<br></li>
+<li>若非空：系统则隐藏这些文件，直至卸载才可访问<br></li>
+</ul></li>
+<li>1个挂载点1次只能挂载1个设备<br></li>
+<li>对设备访问变为对该挂载点的访问<br></li>
+<li>使用完必须正确卸载已挂载设备<br></li>
+</ul>
+
+<h2 id="toc_71">管理磁盘的Shell命令（ mount ）</h2>
+
+<h3 id="toc_72">mount</h3>
+
+<p>格式：mount  [选项]  [设备名]  [目录]<br>
+功能：将磁盘设备挂载到指定的目录，该目录即为此设备的挂载点。<br>
+主要选项说明：<br>
+–t  文件系统类型（type）、-r（read）   </p>
+
+<h3 id="toc_73">umount命令（undo mount）</h3>
+
+<p>格式：umount  设备|目录<br>
+功能：卸载指定的设备。可使用设备名，也可以使用挂载目录名进行卸载。<br>
+【例3】卸载U盘。  </p>
+
+<div><pre><code class="language-none">umount /dev/sda1  </code></pre></div>
+
+<p>或</p>
+
+<div><pre><code class="language-bash">umount /mnt/sub  </code></pre></div>
+
+<h3 id="toc_74">df命令（Display file system）</h3>
+
+<p>格式：df  [选项]<br>
+功能：显示文件系统的相关信息。<br>
+主要选项说明：<br>
+-a（all）、-t  文件系统类型（type）、-x  文件系统类型（except除…以外）、-h（human）   </p>
+
+<h3 id="toc_75">mkfs命令（make file system）</h3>
+
+<p>格式：mkfs  [选项]  设备<br>
+功能：在磁盘上建立文件系统，即磁盘格式化。<br>
+主要选项说明：<br>
+-t  文件系统类型（type）、-c（check）<br>
+注：每个文件系统都包含一个lost+found目录，用于保存执行文件系统检查操作中发现的问题文件。   </p>
+
+<h3 id="toc_76">fsck命令（file system check ）</h3>
+
+<p>格式：fsck  设备<br>
+功能：检查并修复文件系统。  </p>
+
+<h2 id="toc_77">文件系统的配额管理</h2>
+
+<ul>
+<li>文件系统配额是一种磁盘空间的管理机制。<br></li>
+<li>限制用户或组群在某个特定文件系统中所能使用的最大空间。分用户级和组群级的配额管理。<br></li>
+<li>配额管理文件保存于实施配额管理的那个文件系统的挂载目录中，aquota.user文件保存用户级配额的内容，而aquota.group -  文件保留组群级配额的内容。<br></li>
+<li>根据配额特性可将配额分为硬配额和软配额。<br></li>
+<li>只有采用Linux文件系统（ext2和ext3）的文件系统（磁盘分区）才能进行配额管理。<br></li>
+</ul>
+
+<h3 id="toc_78">quotacheck命令</h3>
+
+<p>格式：quotacheck  选项<br>
+功能：检查文件系统的配额限制，并可创建配额管理文件。<br>
+主要选项说明：<br>
+-a（all）、-g（group）、-u（user）、-v（verbose）     </p>
+
+<h3 id="toc_79">edquota命令</h3>
+
+<p>格式：edquota  选项<br>
+功能：编辑配额管理文件。<br>
+主要选项说明：<br>
+用户名、-g  组群名、-t、-p  用户名1  用户名2   </p>
+
+<h3 id="toc_80">quota命令</h3>
+
+<p>格式：quota  用户名<br>
+功能：查看指定用户的配额设置。  </p>
+
+<h3 id="toc_81">quotaon命令</h3>
+
+<p>格式：quotaon  选项<br>
+功能：启动配额管理，其主要选项与quotacheck命令相同。<br>
+与之相反的quotaoff命令可关闭配额管理。  </p>
+
+<h3 id="toc_82">[例10] 对/home文件系统实施用户级的配额管理，普通用户hellen和jerry的软配额为100M，硬配额为150M。</h3>
+
+<ol>
+<li>使用任何文本编辑工具编辑/etc/fstab文件，对“LABEL=/home”所在行进行修改，增加命令选项usrquota。<br></li>
+<li>重新启动系统，让Linux按照改动后的/etc/fstab文件重新挂载各文件系统。<br></li>
+<li>利用quotacheck命令创建aquota.user文件。<br></li>
+<li>利用edquota命令编辑aquota.user文件，设置用户hellen的配额。<br></li>
+<li>利用edquota命令将用户hellen的配额设置复制给jerry用户。<br></li>
+<li>启动配额管理。<br></li>
+</ol>
+
+<h2 id="toc_83">文件概述</h2>
+
+<ul>
+<li>是指Linux按照文件层次标准对文件（目录）进行排列布局。<br>
+文件系统层次标准（File system Hierarchy Standard）是一个文档，它指定 Linux 或其他类 UNIX - 系统上目录的布局。<br></li>
+<li>创建它是为了提供一个共用的布局，让不同的 Linux 发行版将文件放在相同的位置，从而简化独立于发行版的软件开发。<br></li>
+</ul>
+
+<h2 id="toc_84">常用基本目录及功能</h2>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left">/</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">Linux目录树起点</td>
+</tr>
+<tr>
+<td style="text-align: left">bin</td>
+<td style="text-align: left">binary</td>
+<td style="text-align: left">Linux的常用命令</td>
+</tr>
+<tr>
+<td style="text-align: left">boot</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">系统启动时所需程序</td>
+</tr>
+<tr>
+<td style="text-align: left">dev</td>
+<td style="text-align: left">device</td>
+<td style="text-align: left">所有外部设备文件</td>
+</tr>
+<tr>
+<td style="text-align: left">etc</td>
+<td style="text-align: left">拉丁文</td>
+<td style="text-align: left">系统管理时要用到的各种配置文件和子目录</td>
+</tr>
+<tr>
+<td style="text-align: left">home</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">普通用户个人主目录</td>
+</tr>
+<tr>
+<td style="text-align: left">lib</td>
+<td style="text-align: left">library</td>
+<td style="text-align: left">系统动态连接共享库，几乎所有的应用程序都会用到该目录下的共享库</td>
+</tr>
+<tr>
+<td style="text-align: left">media</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">挂载点</td>
+</tr>
+<tr>
+<td style="text-align: left">mnt</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">临时挂载点</td>
+</tr>
+<tr>
+<td style="text-align: left">proc</td>
+<td style="text-align: left">procedure</td>
+<td style="text-align: left">获取在内存中由系统自己产生的信息（虚拟文件系统与有关执行程序的资料 ）</td>
+</tr>
+<tr>
+<td style="text-align: left">root</td>
+<td style="text-align: left"></td>
+<td style="text-align: left">超级用户主目录</td>
+</tr>
+<tr>
+<td style="text-align: left">sbin</td>
+<td style="text-align: left">specialties</td>
+<td style="text-align: left">系统管理员的系统管理程序</td>
+</tr>
+<tr>
+<td style="text-align: left">tmp</td>
+<td style="text-align: left">temporary</td>
+<td style="text-align: left">各程序执行时产生的临时文件</td>
+</tr>
+<tr>
+<td style="text-align: left">usr</td>
+<td style="text-align: left">user</td>
+<td style="text-align: left">各应用程序和文件</td>
+</tr>
+<tr>
+<td style="text-align: left">var</td>
+<td style="text-align: left">variety</td>
+<td style="text-align: left">日志文件</td>
+</tr>
+<tr>
+<td style="text-align: left">opt</td>
+<td style="text-align: left">option</td>
+<td style="text-align: left">额外软件</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="toc_85">文件分类</h2>
+
+<ul>
+<li>普通文件（灰色）<br>
+
+<ul>
+<li>二进制文件直接以文本的二进制形式存储，一般是可执行文件，多媒体文件等。<br></li>
+<li>文本文件以文本的ASCII编码形式存储，系统中配置文件，如passwd。<br></li>
+</ul></li>
+<li>目录文件简称目录（蓝色）<br>
+
+<ul>
+<li>存储一组相关文件的位置、大小、创建时间等信息。<br></li>
+</ul></li>
+<li>链接文件（浅蓝色）<br>
+
+<ul>
+<li>硬链接文件保留所链接文件的索引节点（磁盘的具体物理位置）信息。<br></li>
+<li>符号链接文件类似于Windows中的快捷方式，其本身并不保存文件内容，而只记录所链接文件的路径。<br></li>
+</ul></li>
+<li>设备文件（黄色）<br>
+
+<ul>
+<li>存放I/O设备信息的文件。Linux中的每个设备（安装了驱动程序或兼容）都用一个设备文件来表示。<br></li>
+</ul></li>
+</ul>
+
+<h2 id="toc_86">文件名</h2>
+
+<ul>
+<li>文件名是文件的唯一标识符。Linux中文件名遵循以下原则：<br></li>
+<li>除“/”以外的所有字符都可使用，但为了避免系统混乱，尽量不使用特殊字符。<br>
+
+<ul>
+<li>可使用长文件名，严格区分大小写字母。<br></li>
+<li>尽量设置代表文件内容和类型的有意义的文件名。<br></li>
+</ul></li>
+<li>Linux不强调文件扩展名的作用。<br>
+
+<ul>
+<li>如：test.txt，test均可以是文本文件。<br></li>
+</ul></li>
+<li>数据文件通常还是使用“文件主名.扩展名”格式，并遵循一定的扩展名（文件类型）规则。<br>
+
+<ul>
+<li>如：test.exe，<br></li>
+</ul></li>
+<li>可以不使用扩展名或使用多个扩展名。<br>
+
+<ul>
+<li>如：test， test.tar.gz<br></li>
+</ul></li>
+</ul>
+
+<h2 id="toc_87">文件权限</h2>
+
+<ul>
+<li><p>访问权限  </p>
+
+<ul>
+<li>读取权限（read）：浏览文件/目录中内容的权限。<br></li>
+<li>写入权限（write）：<br>
+
+<ul>
+<li>对文件而言是修改文件内容的权限；<br></li>
+<li>对目录而言是删除、添加和重命名目录内文件的权限。<br></li>
+</ul></li>
+<li>执行权限（execution）：<br>
+
+<ul>
+<li>对可执行文件而言是允许执行的权限；<br></li>
+<li>对目录来讲是进入目录的权限。<br></li>
+</ul></li>
+</ul></li>
+<li><p>与文件权限相关的用户分类  </p>
+
+<ul>
+<li>文件所有者Owner （user，u）：建立文件或目录的用户。<br></li>
+<li>同组用户（group，g）：与文件所有者同属一个组群中的所有用户。<br></li>
+<li>其它用户（other，o）：既不是文件所有者，又不是文件所有者同组用户的其他所有用户。<br></li>
+<li>超级用户负责整个系统的管理和维护，拥有系统中所有文件的全部访问权限。<br></li>
+</ul></li>
+<li><p>访问权限的表示法（ls -l）  </p>
+
+<ol>
+<li>字母表示法<br></li>
+<li>数字表示法<br>
+
+<ul>
+<li>（&mdash;  0）  （&ndash;x  1）  （-w-  2）  （-wx  3）<br></li>
+<li>（&ndash;x（r&ndash;  4）（r-x  5）  （rw-  6）  （rwx  7） </li>
+</ul></li>
+</ol>
+
+<p>注：文件初始访问权限在创建时由系统  </p></li>
+</ul>
+
+<h2 id="toc_88">修改文件权限的Shell命令</h2>
+
+<p><img src="markdownToc_files/img/file-system-chmod.png" alt=""></p>
+
+<h3 id="toc_89">chmod命令（change mode）</h3>
+
+<p>格式：chmod  模式  文件<br>
+功能：修改文件的访问权限。<br>
+模式可由3部分组成：<br>
+【例1】用vi新建file文件，内容不限，查看该文件的访问权限，取消其它用户对file文件读的权限。  </p>
+
+<div><pre><code class="language-bash">chmod o-r file  </code></pre></div>
+
+<p>【例2】增加同组用户对file文件写的权限。  </p>
+
+<div><pre><code class="language-bash">chmod g+w  file  </code></pre></div>
+
+<p>【例3】同时增加其它用户对file文件的读写权限。  </p>
+
+<div><pre><code class="language-bash">chmod o+rw file                       (o+r+w)  </code></pre></div>
+
+<p>【例4】将file文件的访问权限改为664。  </p>
+
+<div><pre><code class="language-bash">chmod 664 file  </code></pre></div>
+
+<h3 id="toc_90">chgrp命令（ change group）</h3>
+
+<p>格式：chgrp  组群  文件<br>
+功能：改变文件的所属组群。<br>
+【例】将file文件所属的组群改为root。  </p>
+
+<div><pre><code class="language-bash">ls –l  
+su  
+chgrp root file  
+ls -l  </code></pre></div>
+
+<h3 id="toc_91">chown命令（ change owner ）</h3>
+
+<p>格式：chown  文件所有者[:组群]  文件<br>
+功能：改变文件的所有者，并可一并修改文件的所属组群。<br>
+【例1】将文件file的所有者由xufqin改为root。  </p>
+
+<div><pre><code class="language-bash">chown root file  </code></pre></div>
+
+<p>【例2】新建test文件，一并修改所有者和组群为xufqin和users。</p>
+
+<div><pre><code class="language-bash">chown xufqin : users test  </code></pre></div>
+
+<h2 id="toc_92">目录和文件管理</h2>
+
+<h3 id="toc_93">桌面环境下管理目录和文件</h3>
+
+<p>桌面环境下用户启动Nautilus或Konqueror文件管理器，都可以查看文件和目录的信息，并可利用文件管理器的菜单命令或快捷菜单，对文件和目录进行移动、复制、重命名、删除、修改属性等操作，还能创建目录和符号链接文件。 </p>
+
+<h3 id="toc_94">管理目录和文件的Shell命令</h3>
+
+<h4 id="toc_95">mkdir命令（make directory）</h4>
+
+<p>格式：mkdir  [选项]  目录<br>
+功能：创建目录。<br>
+主要选项说明：<br>
+-m  访问权限（mode）、-p（parents）<br>
+【例1】创建名为test1的目录。  </p>
+
+<div><pre><code class="language-bash">mkdir test1                   
+ls –l  </code></pre></div>
+
+<p>思考题：如何同时创建多个平级目录？如，test3和test4。<br>
+【例2】在当前目录下创建名为test2的目录，并一并在其下创建linux子目录。  </p>
+
+<div><pre><code class="language-bash">mkdir –p test2/linux                   
+ls                      
+ls test2  </code></pre></div>
+
+<p>【例3】用一条命令创建具有如此结构的目录树。  </p>
+
+<div><pre><code class="language-bash"> $mkdir –p dir1/sub1 dir1/sub2/test1 dir1/sub2/test2 dir1/sub3  </code></pre></div>
+
+<h4 id="toc_96">mv命令（move）</h4>
+
+<p>格式：mv  [选项]  源文件或源目录  目的文件或目的目录<br>
+功能：移动或重命名（同一目录）文件或目录。<br>
+主要选项说明：<br>
+-b（backup）、-f（force）<br>
+【例1】将file文件移动到test1目录，并重名名为file1。  </p>
+
+<div><pre><code class="language-bash">mv file test1/file1  </code></pre></div>
+
+<p>【例2】将file1文件重命名为file.txt。  </p>
+
+<div><pre><code class="language-bash">mv test1/file1 test1/file.txt  </code></pre></div>
+
+<p>【例3】将sub2整体移动到sub1目录中。  </p>
+
+<div><pre><code class="language-bash"> mv dir1/sub2 dir1/sub1/  </code></pre></div>
+
+<h4 id="toc_97">cp命令（copy）</h4>
+
+<p>格式：cp  [选项]  源文件或源目录  目的文件或目的目录<br>
+功能：复制文件或目录。<br>
+主要选项说明：<br>
+-b（backup）、-f（force）、-r或-R（recursive）<br>
+【例1】复制file.txt文件为file.backup，保存在当前目录下。  </p>
+
+<div><pre><code class="language-bash">cp test1/file.txt  file.backup           
+ls  </code></pre></div>
+
+<p>【例2】复制file.txt文件为file.backup保存在当前目录下，若file.backup文件已存在，则对原文件制作备份。  </p>
+
+<div><pre><code class="language-bash">cp –b test1/file.txt file.backup（注：备份文件名file.backup~）  </code></pre></div>
+
+<p>【例3】整体复制test2目录至test1目录下。  </p>
+
+<div><pre><code class="language-bash">cp –r test2 test1/  </code></pre></div>
+
+<h4 id="toc_98">rm命令（remove）</h4>
+
+<p>格式：rm  [选项]  文件或目录<br>
+功能：删除文件或目录。<br>
+主要选项说明：<br>
+-f（force）、-r或-R（recursive）<br>
+【例1】删除test1目录下file.txt文件。  </p>
+
+<div><pre><code class="language-bash">rm test1/file.txt  </code></pre></div>
+
+<p>【例2】 删除test1目录，连同其下子目录。  </p>
+
+<div><pre><code class="language-bash">rm –r test1  </code></pre></div>
+
+<p>【例3】 强制删除test2目录，连同其下子目录。  </p>
+
+<div><pre><code class="language-bash">rm –rf test2  </code></pre></div>
+
+<h4 id="toc_99">ln命令（link）</h4>
+
+<p>格式：ln  [选项]  目标文件  链接文件<br>
+功能：建立链接文件，默认建立硬链接。<br>
+主要选项说明：<br>
+-b（backup）、-s（symbolic）   </p>
+
+<h4 id="toc_100">find命令</h4>
+
+<p>格式：find  [路径]  表达式<br>
+功能：从指定路径开始向下搜索满足表达式的文件和目录。<br>
+主要表达式：<br>
+-name  文件、-g  组群名、-user  用户名、-type  文件类型、-size  [+|-]文件大小<br>
+【例1】从/etc目录开始查找以“fs”开头的文件和目录。  </p>
+
+<div><pre><code class="language-bash">find /etc –name fs*   </code></pre></div>
+
+<p>【例2】从/etc目录开始查找以“f” 或“s”开头的文件和目录，并分页显示。<br>
+ #find /etc –name [fs]*|more<br>
+【例3】从当前目录开始查找所有目录文件。  </p>
+
+<div><pre><code class="language-bash">find –type d  </code></pre></div>
+
+<p>【例4】从当前目录开始查找小于10KB的文件。  </p>
+
+<div><pre><code class="language-bash">find –size -10k  </code></pre></div>
+
+<h4 id="toc_101">grep命令（pattern）</h4>
+
+<p>格式：grep  [选项]  字符串  文件列表<br>
+功能：从指定文本文件或标准输出中查找符合条件的字符串，默认显示其所在行的内容。<br>
+主要选项说明：<br>
+-n（number）、-v （invert除）、-i （ignore不区分大小写）<br>
+【例1】查找/etc/fstab文件中包含“SwAp”的行，并显示其行号。  </p>
+
+<div><pre><code class="language-bash">grep –n SwAp /etc/fstab  </code></pre></div>
+
+<p>【例2】不区分大小写，查找/etc/passwd文件中除“xufqin”外的行，结果保存到dir1目录下sub3子目录test.txt文件中  ）</p>
+
+<div><pre><code class="language-bash">grep  –vi  xufqin /etc/passwd &gt; dir1/sub3/test.txt  </code></pre></div>
+
+<p>思考题：root用户检查xufqin用户是否已登录。  </p>
+
+<div><pre><code class="language-bash">who|grep xufqin  </code></pre></div>
+
+<h4 id="toc_102">du命令（display usage）</h4>
+
+<p>格式：du  [选项]  [目录或文件]<br>
+功能：显示目录或文件大小，默认为KB为单位。参数为目录时，默认递归显示指定目录及其所有子目录的大小。<br>
+主要选项说明：<br>
+-a（all）、-h（human） 、-s（summarize）<br>
+【例1】以人性化方式查看xufqin用户主目录的大小。  </p>
+
+<div><pre><code class="language-bash">du –sh /home/xufqin  </code></pre></div>
+
+<p>【例2】以人性化方式查看etc目录的大小。  </p>
+
+<div><pre><code class="language-bash"> du –sh /etc  </code></pre></div>
+
+<p>【例3】以人性化方式查看etc目录及其子目录的大小。  </p>
+
+<div><pre><code class="language-bash">du –h /etc  </code></pre></div>
+
+<h4 id="toc_103">Examples</h4>
+
+<ol>
+<li><p>将/etc/passwd文件复制到当前目录中。  </p>
+
+<div><pre><code class="language-bash">cp /etc/passwd ./  </code></pre></div></li>
+<li><p>用一条命令新建具有如图所示结构的目录树。  </p>
+
+<div><pre><code class="language-bash">mkdir –p  dir/dir1 dir/dir2/dir21 dir/dir2/dir22  </code></pre></div></li>
+<li><p>将xufqin个人用户主目录整体复制到dir1目录中。  </p>
+
+<div><pre><code class="language-bash">cp –r /home/xufqin dir/dir1/  </code></pre></div></li>
+<li><p>不区分大小写，将/etc/inittab 文件中含“Id:5:”行的内容保存到dir/dir2/dir22的ID.txt文件中。  </p>
+
+<div><pre><code class="language-bash">grep –i Id:5: /etc/inittab&gt; dir/dir2/dir22/ID.txt  </code></pre></div></li>
+<li><p>统计/etc/inittab 文件包含“ #”行数，结果追加到上题ID.txt 中。  </p>
+
+<div><pre><code class="language-bash">grep /etc/inittab |wc –l&gt;&gt; dir/dir2/dir22/ID.txt  </code></pre></div></li>
+<li><p>将dir/dir1目录移到dir/dir2下并重命名为dir/dir2/dir23。  </p>
+
+<div><pre><code class="language-bash">mv  dir/dir1  dir/dir2/dir23   </code></pre></div></li>
+<li><p>删除原dir/dir2/dir21目录  </p>
+
+<div><pre><code class="language-bash">rm  -r  dir/dir2/dir21   </code></pre></div></li>
+<li><p>以易读方式显示dir目录大小。  </p>
+
+<div><pre><code class="language-bash">du  –hs  dir   </code></pre></div></li>
+<li><p>以易读方式显示dir目录及子目录大小。  </p>
+
+<div><pre><code class="language-bash">du  –h  dir  </code></pre></div></li>
+<li><p>从/etc目录向下查找扩展名为.conf的文件。 （统计文件数）  </p>
+
+<div><pre><code class="language-bash">find /etc –name *.conf  
+find /etc –name *.conf |wc -l  </code></pre></div></li>
+<li><p>查找/etc目录下扩展名为.conf的文件。（统计文件数并将结果保存到dir目录的wc.txt文件中）  </p>
+
+<div><pre><code class="language-bash">ls /etc/*.conf  
+ls /etc/*.conf |wc –l&gt; dir/wc.txt  </code></pre></div></li>
+<li><p>分别查看dir/wc.txt的访问权限（解读，转换成数字表示）和内容  </p>
+
+<div><pre><code class="language-bash">ls –l dir/wc.txt  
+cat dir/wc.txt  </code></pre></div></li>
+<li><p>强制删除dir/wc.txt文件。  </p>
+
+<div><pre><code class="language-bash">rm –f dir/wc.txt  </code></pre></div></li>
+<li><p>强制删除dirmulu。  </p>
+
+<div><pre><code class="language-bash">rm –rf dir  </code></pre></div></li>
+</ol>
+
+<h2 id="toc_104">文件归档与压缩</h2>
+
+<h3 id="toc_105">桌面环境下归档与压缩文件</h3>
+
+<ul>
+<li>「主菜单」=&gt;「附件」=&gt;「文件打包器」。
+
+<ul>
+<li>新建归档/压缩文件</li>
+<li>更新归档/压缩文件</li>
+<li>还原归档/压缩文件</li>
+</ul></li>
+<li>Nautilus文件管理器 
+
+<ul>
+<li>快速归档/压缩文件</li>
+<li>快速还原归档/压缩文件</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_106">归档与压缩文件的Shell命令</h3>
+
+<h4 id="toc_107">tar命令</h4>
+
+<p>格式：tar  选项  归档/压缩文件  [文件或目录列表]<br>
+功能：将多个文件或目录归档为tar文件，如果使用相关选项还可压缩归档文件。  </p>
+
+<ol>
+<li><p>将/etc目录下所有扩展名为.conf文件归档保存到当前目录名为etcconf.tar文件。  </p>
+
+<div><pre><code class="language-bash"> tar –cf etcconf.tar /etc/*.conf  </code></pre></div></li>
+<li><p>将/home目录下所有文件归档并压缩，保存到当前目录名为home.tar.gz文件。  </p>
+
+<div><pre><code class="language-bash"> tar –czf home.tar.gz /home  </code></pre></div></li>
+<li><p>查看etcconf.tar文件内容。  </p>
+
+<div><pre><code class="language-bash"> tar –tf etcconf.tar  </code></pre></div></li>
+<li><p>查看home.tar.gz文件内容。  </p>
+
+<div><pre><code class="language-bash"> tar –tf home.tar.gz  </code></pre></div></li>
+<li><p>将当前目录中install.log文件追加到etcconf.tar文件。  </p>
+
+<div><pre><code class="language-bash"> tar –rf etcconf.tar install.log  </code></pre></div></li>
+<li><p>还原etcconf.tar中的install.log文件  </p>
+
+<div><pre><code class="language-bash"> tar –xf etcconf.tar install.log  </code></pre></div></li>
+</ol>
+
+<h4 id="toc_108">gzip命令</h4>
+
+<p>格式：gzip  [选项]  文件|目录<br>
+功能：压缩/解压缩文件。无选项参数时执行压缩操作。压缩后产生扩展名为.gz的压缩文件，并删除源文件。<br>
+主要选项说明：<br>
+-d（decompress）、-r（recursive）、-v（verbose）<br>
+【例1】将etcconf.tar文件压缩为.gz格式。</p>
+
+<div><pre><code class="language-bash">gzip etcconf.tar  </code></pre></div>
+
+<p>【例2】当前目录的所有文件压缩为.gz格式。  </p>
+
+<div><pre><code class="language-bash">gzip *  </code></pre></div>
+
+<p>【例3】 对etcconf.tar.gz进行解压缩。  </p>
+
+<div><pre><code class="language-bash">gzip –d etcconf.tar.gz  </code></pre></div>
+
+<p>【例4】 对当前目录下的.gz进行解压缩。  </p>
+
+<div><pre><code class="language-bash">gzip –d *  </code></pre></div>
+
+<h4 id="toc_109">zip命令</h4>
+
+<p>格式：zip  [选项]  压缩文件  文件列表<br>
+功能：可将多个文件归档后压缩。默认不删除源文件 。<br>
+主要选项说明：<br>
+-m（remove）、-r（recursive）<br>
+【例】将当前目录下的所有文件归档压缩为file.zip文件。  </p>
+
+<div><pre><code class="language-bash">zip file.zip *  </code></pre></div>
+
+<h4 id="toc_110">unzip命令</h4>
+
+<p>格式：unzip  [选项]  压缩文件<br>
+功能：解压缩扩展名为.zip的压缩文件。<br>
+主要选项说明：<br>
+-l（list）、-t（test）、-d  目录、-n（no覆盖）、-o（覆盖）<br>
+【例1】 查看file.zip文件所包含的文件。  </p>
+
+<div><pre><code class="language-bash"> unzip –l file.zip  </code></pre></div>
+
+<p>【例1】 将file.zip文件解压到dir新目录中。  </p>
+
+<div><pre><code class="language-bash">mkdir dir  
+unzip –d dir file.zip  </code></pre></div>
+
+<ol>
+<li><p>将/home打包并压缩为home.tar.gz，保存在当前目录中。  </p>
+
+<div><pre><code class="language-bash">tar –tzf home.tar.gz /home  </code></pre></div></li>
+<li><p>将root用户个人用户主目录中的install.log文件加入home.tar包文件中。  </p>
+
+<div><pre><code class="language-bash">gzip –d home.tar.gz  
+tar –rf home.tar /root/install.log  </code></pre></div></li>
+<li><p>假设/root/install.log文件遭到损坏，查看home.tar包文件内容，确认其中有install.log文件，并进行还原。  </p>
+
+<div><pre><code class="language-bash">tar  –tf  home.tar   
+tar  –xf  home.tar  install.log  </code></pre></div></li>
+<li><p>采用gzip格式压缩当前目录中所有文件，并查看结果。  </p>
+
+<div><pre><code class="language-bash">gzip *  
+ ls  </code></pre></div></li>
+<li><p>将当前目录中所有文件压缩为tar.zip文件，并查看结果。  </p>
+
+<div><pre><code class="language-bash">zip tar.zip *  
+ ls  </code></pre></div></li>
+<li><p>查看tar.zip的内容。  </p>
+
+<div><pre><code class="language-bash"> zip –l tar.zip   </code></pre></div></li>
+</ol>
+
+<h2 id="toc_111">RPM软件包管理</h2>
+
+<ul>
+<li>RPM（RPM Package Manager）Linux中公认的软件包管理标准。</li>
+<li>文件名采用固定格式：“软件名-主版本号-次版本号.硬件平台类型.rpm”。</li>
+<li>桌面环境下可安装和删除安装光盘上的RPM软件包。<br></li>
+</ul>
+
+<h3 id="toc_112">管理RPM软件包</h3>
+
+<h4 id="toc_113">安装RPM软件包</h4>
+
+<p>格式：rpm  –i[选项]  软件包文件<br>
+功能：安装RPM软件包。<br>
+主要选项说明：<br>
+-v（verbose）、-h（hash）、&ndash;replacepkgs   </p>
+
+<h4 id="toc_114">升级RPM软件包</h4>
+
+<p>格式：rpm  –U[选项]  软件包文件<br>
+功能：升级RPM软件包。如果当前系统中未安装指定的RPM软件包则直接安装。<br>
+主要选项说明：<br>
+-v（verbose）、-h（hash）   </p>
+
+<h4 id="toc_115">查询RPM软件包</h4>
+
+<p>格式：rpm  –q[选项]<br>
+    功能：查询软件包的相关信息。<br>
+主要选项说明：<br>
+-a（all）、-f  文件（file归属）、i （list ）<br>
+【例1】查询系统中已安装哪些软件包。  </p>
+
+<div><pre><code class="language-bash"> rpm  –qa  </code></pre></div>
+
+<p>【例2】查询系统中是否已安装vsftpd软件包。  </p>
+
+<div><pre><code class="language-bash"> rpm  –qa|grep  vsftpd或rpm  –qa vsftpd  </code></pre></div>
+
+<p>【例3】查询系统中已安装vsftpd软件包详细信息。  </p>
+
+<div><pre><code class="language-bash"> rpm  –qi vsftpd  </code></pre></div>
+
+<p>【例4】查询系统中已安装samba软件包详细信息。  </p>
+
+<div><pre><code class="language-bash"> rpm  –qi samba  </code></pre></div>
+
+<h4 id="toc_116">验证RPM软件包</h4>
+
+<p>格式1：rpm  –V  软件包<br>
+格式2：rpm  –V[选项]<br>
+功能：验证软件包是否正常。<br>
+主要选项说明：<br>
+-a（all）、-f  文件（file）<br>
+用8位二进制表示某项验证的失败：  </p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left">S</td>
+<td style="text-align: left">（size）</td>
+</tr>
+<tr>
+<td style="text-align: left">M</td>
+<td style="text-align: left">（mode）</td>
+</tr>
+<tr>
+<td style="text-align: left">5</td>
+<td style="text-align: left">（MD5）</td>
+</tr>
+<tr>
+<td style="text-align: left">D</td>
+<td style="text-align: left">（device）</td>
+</tr>
+<tr>
+<td style="text-align: left">L</td>
+<td style="text-align: left">（link）</td>
+</tr>
+<tr>
+<td style="text-align: left">U</td>
+<td style="text-align: left">（user）</td>
+</tr>
+<tr>
+<td style="text-align: left">G</td>
+<td style="text-align: left">（group）</td>
+</tr>
+<tr>
+<td style="text-align: left">T</td>
+<td style="text-align: left">（time）</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="toc_117">删除RPM软件包</h4>
+
+<p>格式：rpm  –e  软件包<br>
+功能：删除RPM软件包。<br>
+注：删除软件包时，参数不能使用RPM软件包的完整文件名，只能使用软件名称或软件名称加上版本编号。  </p>
+
+<h1 id="toc_118">命令</h1>
+
+<h2 id="toc_119">date</h2>
 
 <p>格式：date   [MMDDhhmm[YYYY]]<br>
 功能：查看或修改系统时间。</p>
 
-<h2 id="toc_66">cal</h2>
+<h2 id="toc_120">cal</h2>
 
 <p>cal命令（calendar）<br>
 格式：cal   [YYYY]<br>
 功能：显示日历。</p>
 
-<h2 id="toc_67">pwd</h2>
+<h2 id="toc_121">pwd</h2>
 
 <p>格式：pwd<br>
 功能：显示当前目录的绝对路径。</p>
@@ -1217,7 +2084,7 @@ $ man mail</code></pre></div>
 * 目录之间的层次关系总是用“/”来表示。
 * 行首的“/”表示根目录，即该路径为绝对路径。</p>
 
-<h2 id="toc_68">cd</h2>
+<h2 id="toc_122">cd</h2>
 
 <p>格式：cd   [目录]<br>
 功能：切换到指定目录。</p>
@@ -1226,7 +2093,7 @@ $ man mail</code></pre></div>
 * 超级用户的个人用户主目录是/root；
 * 普通用户的个人用户主目录是/home下与该用户同名的子目录，如普通用户hellen主目录默认是/home/hellen。 </p>
 
-<h2 id="toc_69">ls</h2>
+<h2 id="toc_123">ls</h2>
 
 <p>格式：ls  [选项]  [文件|目录]<br>
 功能：显示指定目录中的文件和子目录信息。<br>
@@ -1234,14 +2101,14 @@ $ man mail</code></pre></div>
 -a（all）、-l（long）、-d（directory）、-t（time）<br>
 -R（recursive）…</p>
 
-<h2 id="toc_70">cat</h2>
+<h2 id="toc_124">cat</h2>
 
 <p>格式：cat  [选项]  文件列表<br>
 功能：显示文本文件的内容。<br>
 主要选项说明:<br>
 *         -n（number）在每一行前显示行号</p>
 
-<h2 id="toc_71">more</h2>
+<h2 id="toc_125">more</h2>
 
 <p>格式：more  文件<br>
 功能：分屏显示文本文件的内容。  </p>
@@ -1250,14 +2117,14 @@ $ man mail</code></pre></div>
 按Enter键显示下一行内容；按空格键显示下一屏的内容：按q键，则退出more命令。<br>
 less 命令和more命令唯一的不同是more命令只能向后翻页，而less命令可以向前向后翻页。</p>
 
-<h2 id="toc_72">tail</h2>
+<h2 id="toc_126">tail</h2>
 
 <p>格式：tail  [选项]  文件<br>
 功能：显示文本文件的结尾部分，默认显示文件的最后10行。<br>
 主要选项说明：<br>
 -n  数字（number）指定显示的行数  </p>
 
-<h2 id="toc_73">mam</h2>
+<h2 id="toc_127">mam</h2>
 
 <p>格式：man  命令名<br>
 功能：显示指定命令的手册页帮助信息。</p>
@@ -1265,20 +2132,20 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 <p><strong>注：</strong><br>
 屏幕显示出该命令在Shell手册页的第一屏帮助信息，用户可使用上下方向键、PgDn、PgUp键前后翻阅帮助信息，按q键则退出man命令。</p>
 
-<h2 id="toc_74">&ndash;help选项</h2>
+<h2 id="toc_128">&ndash;help选项</h2>
 
 <p>格式：命令名  &ndash;help<br>
 功能：显示指定命令的帮助信息。<br>
 使用&ndash;help选项也可获取命令的的帮助信息，但不是所有的命令都有此选项。help选项提供的帮助信息多为中文。</p>
 
-<h2 id="toc_75">wc</h2>
+<h2 id="toc_129">wc</h2>
 
 <p>格式：wc  [选项]  文件<br>
 功能：显示文本文件的行数、字数和字符数。<br>
 主要选项说明：-c（character）、-l（line）<br>
                             -w（word），默认=clw</p>
 
-<h2 id="toc_76">Shell命令的通配符</h2>
+<h2 id="toc_130">Shell命令的通配符</h2>
 
 <ol>
 <li>通配符“<em>”<br>
@@ -1293,7 +2160,7 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 <li>“*”、“?” 只在[ ]外起特殊作用，“！”、“-”只在[ ]内起特殊作用。</li>
 </ol>
 
-<h2 id="toc_77">输入输出重定向（输出）</h2>
+<h2 id="toc_131">输入输出重定向（输出）</h2>
 
 <p>Linux的标准输入是指键盘，标准输出和标准错误输出均是屏幕。    </p>
 
@@ -1303,7 +2170,7 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 功能与输出重定向基本相同，不同的之处在于：附加输出重定向将输出内容添加在原来文件已有内容的后面，而不会覆盖其内容。Bash通过符号“&gt;&gt;”来实现。</li>
 </ol>
 
-<h2 id="toc_78">创建和合并文本文件</h2>
+<h2 id="toc_132">创建和合并文本文件</h2>
 
 <ol>
 <li>创建<br>
@@ -1316,9 +2183,9 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 举例：cat  f1  f2  &gt;  f3<br></li>
 </ol>
 
-<h2 id="toc_79">输入输出重定向（错误）</h2>
+<h2 id="toc_133">输入输出重定向（错误）</h2>
 
-<h3 id="toc_80">输出重定向</h3>
+<h3 id="toc_134">输出重定向</h3>
 
 <p>Shell中标准输出与错误输出是两个独立的操作。<br>
 程序的执行结果显示在屏幕上，而错误信息重定向到指定文件，使用“2&gt;”符号。<br>
@@ -1326,10 +2193,10 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 
 <p>[例14] 查看/temp目录的文件和子目录信息，如果有错误信息，则保存到err文件。 </p>
 
-<div><pre><code class="language-bash">$ls /temp  
-$ls /temp&gt;err</code></pre></div>
+<div><pre><code class="language-bash">ls /temp  
+ls /temp&gt;err</code></pre></div>
 
-<h3 id="toc_81">输入重定向</h3>
+<h3 id="toc_135">输入重定向</h3>
 
 <p>不从标准输入（键盘）读入数据，而是从文件读入数据，用“&lt;”符号来实现。<br>
 因为大多数的命令都以参数的形式在命令行上指定输入文件，所以输入重定向并不常使用。<br>
@@ -1337,9 +2204,9 @@ $ls /temp&gt;err</code></pre></div>
 “cat &lt; f1”命令的输出结果与“cat f1”命令完全相同。<br>
 示例</p>
 
-<div><pre><code class="language-bash"># newusers &lt; stu.txt</code></pre></div>
+<div><pre><code class="language-bash"> newusers &lt; stu.txt</code></pre></div>
 
-<h2 id="toc_82">history</h2>
+<h2 id="toc_136">history</h2>
 
 <p>每个用户在自己的主目录下都有一个名为.bash_history的隐藏文件，保存（退出登入时）曾执行过的Shell命令。Bash默认最多保存1000。
 用上下键，PgUp或PgDown键查找，按Enter再次执行或命令行进行编辑、修改后再执行。   </p>
@@ -1353,7 +2220,7 @@ $ls /temp&gt;err</code></pre></div>
 <p>功能：查看Shell命令的历史记录。<br>
 [例16] 查看最近执行过的5个Shell命令。</p>
 
-<div><pre><code class="language-bash">$ history  5 </code></pre></div>
+<div><pre><code class="language-bash"> history  5 </code></pre></div>
 
 <ol>
 <li>格式：</li>
@@ -1364,14 +2231,14 @@ $ls /temp&gt;err</code></pre></div>
 <p>功能：执行指定序号的Shell命令。“!!”可以执行刚执行过的命令。<br>
 [例17] 执行序号为5的Shell命令。
 <code>bash
-$ !5 
+ !5 
 </code>
 思考题：再一次将序号为5的Shell命令<br>
 <code>bash
-$!!
+!!
 </code></p>
 
-<h2 id="toc_83">别名</h2>
+<h2 id="toc_137">别名</h2>
 
 <p>别名是按照Shell命令的标准格式所写的命令行的缩写<br>
 格式：</p>
