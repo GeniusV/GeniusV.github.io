@@ -1112,6 +1112,132 @@ crond进程负责检测crontab配置文件，并按照其设置内容，定期�
 
 <h2 id="toc_87">文件权限</h2>
 
+<h3 id="toc_88">文件权限 by GeniusV</h3>
+
+<p>linux查看及修改文件权限以及相关  </p>
+
+<p>查看文件权限的语句：  </p>
+
+<p>在终端输入:   </p>
+
+<div><pre><code class="language-bash">ls -l xxx.xxx （xxx.xxx是文件名）  </code></pre></div>
+
+<p>那么就会出现相类似的信息，主要都是这些：<br>
+<code>-rw-rw-r--</code>  </p>
+
+<p>一共有10位数<br>
+其中：   </p>
+
+<ul>
+<li>最前面那个 - 代表的是类型<br></li>
+<li>中间那三个 rw-    代表的是所有者（user）<br></li>
+<li>然后那三个 rw-    代表的是组群（group）<br></li>
+<li>最后那三个 r&ndash;    代表的是其他人（other）<br></li>
+</ul>
+
+<p>然后我再解释一下后面那9位数：  </p>
+
+<ul>
+<li>r 表示文件可以被读（read）<br></li>
+<li>w 表示文件可以被写（write）<br></li>
+<li>x 表示文件可以被执行（如果它是程序的话）<br></li>
+<li>- 表示相应的权限还没有被授予<br></li>
+</ul>
+
+<p>好了<br>
+现在该说说修改文件权限了  </p>
+
+<p>在终端输入：  </p>
+
+<div><pre><code class="language-bash">chmod o+w xxx.xxx  </code></pre></div>
+
+<p>表示给其他人授予写xxx.xxx这个文件的权限  </p>
+
+<div><pre><code class="language-bash">chmod go-rw xxx.xxx  </code></pre></div>
+
+<p>表示删除xxx.xxx中组群和其他人的读和写的权限  </p>
+
+<p>其中:</p>
+
+<ul>
+<li>u 代表所有者（user）<br></li>
+<li>g 代表所有者所在的组群（group）<br></li>
+<li>o 代表其他人，但不是u和g （other）<br></li>
+<li><p>a 代表全部的人，也就是包括u，g和o  </p></li>
+<li><p>r 表示文件可以被读（read）</p></li>
+<li><p>w 表示文件可以被写（write）  </p></li>
+<li><p>x 表示文件可以被执行（如果它是程序的话）  </p></li>
+</ul>
+
+<p>其中：rwx也可以用数字来代替  </p>
+
+<ul>
+<li>r &mdash;&mdash;&mdash;&mdash;4<br></li>
+<li>w &mdash;&mdash;&mdash;&ndash;2<br></li>
+<li>x &mdash;&mdash;&mdash;&mdash;1<br></li>
+<li>- &mdash;&mdash;&mdash;&mdash;0<br></li>
+</ul>
+
+<p>行动：  </p>
+
+<ul>
+<li>+ 表示添加权限<br></li>
+<li>- 表示删除权限<br></li>
+<li>= 表示使之成为唯一的权限<br></li>
+</ul>
+
+<p>当大家都明白了上面的东西之后，那么我们常见的以下的一些权限就很容易都明白了：  </p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: left"><code>-rw-------</code></td>
+<td style="text-align: left">(600)</td>
+<td style="text-align: left">只有所有者才有读和写的权限</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>-rw-r--r--</code></td>
+<td style="text-align: left">(644)</td>
+<td style="text-align: left">只有所有者才有读和写的权限，组群和其他人只有读的权限</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>-rwx------</code></td>
+<td style="text-align: left">(700)</td>
+<td style="text-align: left">只有所有者才有读，写，执行的权限</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>-rwxr-xr-x</code></td>
+<td style="text-align: left">(755)</td>
+<td style="text-align: left">只有所有者才有读，写，执行的权限，组群和其他人只有读和执行的权限</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>-rwx--x--x</code></td>
+<td style="text-align: left">(711)</td>
+<td style="text-align: left">只有所有者才有读，写，执行的权限，组群和其他人只有执行的权限</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>-rw-rw-rw-</code></td>
+<td style="text-align: left">(666)</td>
+<td style="text-align: left">每个人都有读写的权限</td>
+</tr>
+<tr>
+<td style="text-align: left"><code>-rwxrwxrwx</code></td>
+<td style="text-align: left">(777)</td>
+<td style="text-align: left">每个人都有读写和执行的权限</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_89">文件权限 from PPT</h3>
+
 <ul>
 <li><p>访问权限  </p>
 
@@ -1153,11 +1279,11 @@ crond进程负责检测crontab配置文件，并按照其设置内容，定期�
 <p>注：文件初始访问权限在创建时由系统  </p></li>
 </ul>
 
-<h2 id="toc_88">修改文件权限的Shell命令</h2>
+<h2 id="toc_90">修改文件权限的Shell命令</h2>
 
 <p><img src="markdownToc_files/img/file-system-chmod.png" alt=""></p>
 
-<h3 id="toc_89">chmod命令（change mode）</h3>
+<h3 id="toc_91">chmod命令（change mode）</h3>
 
 <p>格式：chmod  模式  文件<br>
 功能：修改文件的访问权限。<br>
@@ -1178,7 +1304,7 @@ crond进程负责检测crontab配置文件，并按照其设置内容，定期�
 
 <div><pre><code class="language-bash">chmod 664 file  </code></pre></div>
 
-<h3 id="toc_90">chgrp命令（ change group）</h3>
+<h3 id="toc_92">chgrp命令（ change group）</h3>
 
 <p>格式：chgrp  组群  文件<br>
 功能：改变文件的所属组群。<br>
@@ -1189,7 +1315,7 @@ su
 chgrp root file  
 ls -l  </code></pre></div>
 
-<h3 id="toc_91">chown命令（ change owner ）</h3>
+<h3 id="toc_93">chown命令（ change owner ）</h3>
 
 <p>格式：chown  文件所有者[:组群]  文件<br>
 功能：改变文件的所有者，并可一并修改文件的所属组群。<br>
@@ -1201,15 +1327,15 @@ ls -l  </code></pre></div>
 
 <div><pre><code class="language-bash">chown xufqin : users test  </code></pre></div>
 
-<h2 id="toc_92">目录和文件管理</h2>
+<h2 id="toc_94">目录和文件管理</h2>
 
-<h3 id="toc_93">桌面环境下管理目录和文件</h3>
+<h3 id="toc_95">桌面环境下管理目录和文件</h3>
 
 <p>桌面环境下用户启动Nautilus或Konqueror文件管理器，都可以查看文件和目录的信息，并可利用文件管理器的菜单命令或快捷菜单，对文件和目录进行移动、复制、重命名、删除、修改属性等操作，还能创建目录和符号链接文件。 </p>
 
-<h3 id="toc_94">管理目录和文件的Shell命令</h3>
+<h3 id="toc_96">管理目录和文件的Shell命令</h3>
 
-<h4 id="toc_95">mkdir命令（make directory）</h4>
+<h4 id="toc_97">mkdir命令（make directory）</h4>
 
 <p>格式：mkdir  [选项]  目录<br>
 功能：创建目录。<br>
@@ -1231,7 +1357,7 @@ ls test2  </code></pre></div>
 
 <div><pre><code class="language-bash"> $mkdir –p dir1/sub1 dir1/sub2/test1 dir1/sub2/test2 dir1/sub3  </code></pre></div>
 
-<h4 id="toc_96">mv命令（move）</h4>
+<h4 id="toc_98">mv命令（move）</h4>
 
 <p>格式：mv  [选项]  源文件或源目录  目的文件或目的目录<br>
 功能：移动或重命名（同一目录）文件或目录。<br>
@@ -1249,7 +1375,7 @@ ls test2  </code></pre></div>
 
 <div><pre><code class="language-bash"> mv dir1/sub2 dir1/sub1/  </code></pre></div>
 
-<h4 id="toc_97">cp命令（copy）</h4>
+<h4 id="toc_99">cp命令（copy）</h4>
 
 <p>格式：cp  [选项]  源文件或源目录  目的文件或目的目录<br>
 功能：复制文件或目录。<br>
@@ -1268,7 +1394,7 @@ ls  </code></pre></div>
 
 <div><pre><code class="language-bash">cp –r test2 test1/  </code></pre></div>
 
-<h4 id="toc_98">rm命令（remove）</h4>
+<h4 id="toc_100">rm命令（remove）</h4>
 
 <p>格式：rm  [选项]  文件或目录<br>
 功能：删除文件或目录。<br>
@@ -1286,14 +1412,14 @@ ls  </code></pre></div>
 
 <div><pre><code class="language-bash">rm –rf test2  </code></pre></div>
 
-<h4 id="toc_99">ln命令（link）</h4>
+<h4 id="toc_101">ln命令（link）</h4>
 
 <p>格式：ln  [选项]  目标文件  链接文件<br>
 功能：建立链接文件，默认建立硬链接。<br>
 主要选项说明：<br>
 -b（backup）、-s（symbolic）   </p>
 
-<h4 id="toc_100">find命令</h4>
+<h4 id="toc_102">find命令</h4>
 
 <p>格式：find  [路径]  表达式<br>
 功能：从指定路径开始向下搜索满足表达式的文件和目录。<br>
@@ -1313,7 +1439,7 @@ ls  </code></pre></div>
 
 <div><pre><code class="language-bash">find –size -10k  </code></pre></div>
 
-<h4 id="toc_101">grep命令（pattern）</h4>
+<h4 id="toc_103">grep命令（pattern）</h4>
 
 <p>格式：grep  [选项]  字符串  文件列表<br>
 功能：从指定文本文件或标准输出中查找符合条件的字符串，默认显示其所在行的内容。<br>
@@ -1331,7 +1457,7 @@ ls  </code></pre></div>
 
 <div><pre><code class="language-bash">who|grep xufqin  </code></pre></div>
 
-<h4 id="toc_102">du命令（display usage）</h4>
+<h4 id="toc_104">du命令（display usage）</h4>
 
 <p>格式：du  [选项]  [目录或文件]<br>
 功能：显示目录或文件大小，默认为KB为单位。参数为目录时，默认递归显示指定目录及其所有子目录的大小。<br>
@@ -1349,7 +1475,7 @@ ls  </code></pre></div>
 
 <div><pre><code class="language-bash">du –h /etc  </code></pre></div>
 
-<h4 id="toc_103">Examples</h4>
+<h4 id="toc_105">Examples</h4>
 
 <ol>
 <li><p>将/etc/passwd文件复制到当前目录中。  </p>
@@ -1399,9 +1525,9 @@ cat dir/wc.txt  </code></pre></div></li>
 <div><pre><code class="language-bash">rm –rf dir  </code></pre></div></li>
 </ol>
 
-<h2 id="toc_104">文件归档与压缩</h2>
+<h2 id="toc_106">文件归档与压缩</h2>
 
-<h3 id="toc_105">桌面环境下归档与压缩文件</h3>
+<h3 id="toc_107">桌面环境下归档与压缩文件</h3>
 
 <ul>
 <li>「主菜单」=&gt;「附件」=&gt;「文件打包器」。
@@ -1419,9 +1545,9 @@ cat dir/wc.txt  </code></pre></div></li>
 </ul></li>
 </ul>
 
-<h3 id="toc_106">归档与压缩文件的Shell命令</h3>
+<h3 id="toc_108">归档与压缩文件的Shell命令</h3>
 
-<h4 id="toc_107">tar命令</h4>
+<h4 id="toc_109">tar命令</h4>
 
 <p>格式：tar  选项  归档/压缩文件  [文件或目录列表]<br>
 功能：将多个文件或目录归档为tar文件，如果使用相关选项还可压缩归档文件。  </p>
@@ -1447,7 +1573,7 @@ cat dir/wc.txt  </code></pre></div></li>
 <div><pre><code class="language-bash"> tar –xf etcconf.tar install.log  </code></pre></div></li>
 </ol>
 
-<h4 id="toc_108">gzip命令</h4>
+<h4 id="toc_110">gzip命令</h4>
 
 <p>格式：gzip  [选项]  文件|目录<br>
 功能：压缩/解压缩文件。无选项参数时执行压缩操作。压缩后产生扩展名为.gz的压缩文件，并删除源文件。<br>
@@ -1469,7 +1595,7 @@ cat dir/wc.txt  </code></pre></div></li>
 
 <div><pre><code class="language-bash">gzip –d *  </code></pre></div>
 
-<h4 id="toc_109">zip命令</h4>
+<h4 id="toc_111">zip命令</h4>
 
 <p>格式：zip  [选项]  压缩文件  文件列表<br>
 功能：可将多个文件归档后压缩。默认不删除源文件 。<br>
@@ -1479,7 +1605,7 @@ cat dir/wc.txt  </code></pre></div></li>
 
 <div><pre><code class="language-bash">zip file.zip *  </code></pre></div>
 
-<h4 id="toc_110">unzip命令</h4>
+<h4 id="toc_112">unzip命令</h4>
 
 <p>格式：unzip  [选项]  压缩文件<br>
 功能：解压缩扩展名为.zip的压缩文件。<br>
@@ -1519,7 +1645,7 @@ tar  –xf  home.tar  install.log  </code></pre></div></li>
 <div><pre><code class="language-bash"> zip –l tar.zip   </code></pre></div></li>
 </ol>
 
-<h2 id="toc_111">RPM软件包管理</h2>
+<h2 id="toc_113">RPM软件包管理</h2>
 
 <ul>
 <li>RPM（RPM Package Manager）Linux中公认的软件包管理标准。</li>
@@ -1527,23 +1653,23 @@ tar  –xf  home.tar  install.log  </code></pre></div></li>
 <li>桌面环境下可安装和删除安装光盘上的RPM软件包。<br></li>
 </ul>
 
-<h3 id="toc_112">管理RPM软件包</h3>
+<h3 id="toc_114">管理RPM软件包</h3>
 
-<h4 id="toc_113">安装RPM软件包</h4>
+<h4 id="toc_115">安装RPM软件包</h4>
 
 <p>格式：rpm  –i[选项]  软件包文件<br>
 功能：安装RPM软件包。<br>
 主要选项说明：<br>
 -v（verbose）、-h（hash）、&ndash;replacepkgs   </p>
 
-<h4 id="toc_114">升级RPM软件包</h4>
+<h4 id="toc_116">升级RPM软件包</h4>
 
 <p>格式：rpm  –U[选项]  软件包文件<br>
 功能：升级RPM软件包。如果当前系统中未安装指定的RPM软件包则直接安装。<br>
 主要选项说明：<br>
 -v（verbose）、-h（hash）   </p>
 
-<h4 id="toc_115">查询RPM软件包</h4>
+<h4 id="toc_117">查询RPM软件包</h4>
 
 <p>格式：rpm  –q[选项]<br>
     功能：查询软件包的相关信息。<br>
@@ -1565,7 +1691,7 @@ tar  –xf  home.tar  install.log  </code></pre></div></li>
 
 <div><pre><code class="language-bash"> rpm  –qi samba  </code></pre></div>
 
-<h4 id="toc_116">验证RPM软件包</h4>
+<h4 id="toc_118">验证RPM软件包</h4>
 
 <p>格式1：rpm  –V  软件包<br>
 格式2：rpm  –V[选项]<br>
@@ -1618,26 +1744,26 @@ tar  –xf  home.tar  install.log  </code></pre></div></li>
 </tbody>
 </table>
 
-<h4 id="toc_117">删除RPM软件包</h4>
+<h4 id="toc_119">删除RPM软件包</h4>
 
 <p>格式：rpm  –e  软件包<br>
 功能：删除RPM软件包。<br>
 注：删除软件包时，参数不能使用RPM软件包的完整文件名，只能使用软件名称或软件名称加上版本编号。  </p>
 
-<h1 id="toc_118">命令</h1>
+<h1 id="toc_120">命令</h1>
 
-<h2 id="toc_119">date</h2>
+<h2 id="toc_121">date</h2>
 
 <p>格式：date   [MMDDhhmm[YYYY]]<br>
 功能：查看或修改系统时间。</p>
 
-<h2 id="toc_120">cal</h2>
+<h2 id="toc_122">cal</h2>
 
 <p>cal命令（calendar）<br>
 格式：cal   [YYYY]<br>
 功能：显示日历。</p>
 
-<h2 id="toc_121">pwd</h2>
+<h2 id="toc_123">pwd</h2>
 
 <p>格式：pwd<br>
 功能：显示当前目录的绝对路径。</p>
@@ -1648,7 +1774,7 @@ tar  –xf  home.tar  install.log  </code></pre></div></li>
 * 目录之间的层次关系总是用“/”来表示。
 * 行首的“/”表示根目录，即该路径为绝对路径。</p>
 
-<h2 id="toc_122">cd</h2>
+<h2 id="toc_124">cd</h2>
 
 <p>格式：cd   [目录]<br>
 功能：切换到指定目录。</p>
@@ -1657,7 +1783,7 @@ tar  –xf  home.tar  install.log  </code></pre></div></li>
 * 超级用户的个人用户主目录是/root；
 * 普通用户的个人用户主目录是/home下与该用户同名的子目录，如普通用户hellen主目录默认是/home/hellen。 </p>
 
-<h2 id="toc_123">ls</h2>
+<h2 id="toc_125">ls</h2>
 
 <p>格式：ls  [选项]  [文件|目录]<br>
 功能：显示指定目录中的文件和子目录信息。<br>
@@ -1665,14 +1791,14 @@ tar  –xf  home.tar  install.log  </code></pre></div></li>
 -a（all）、-l（long）、-d（directory）、-t（time）<br>
 -R（recursive）…</p>
 
-<h2 id="toc_124">cat</h2>
+<h2 id="toc_126">cat</h2>
 
 <p>格式：cat  [选项]  文件列表<br>
 功能：显示文本文件的内容。<br>
 主要选项说明:<br>
 *         -n（number）在每一行前显示行号</p>
 
-<h2 id="toc_125">more</h2>
+<h2 id="toc_127">more</h2>
 
 <p>格式：more  文件<br>
 功能：分屏显示文本文件的内容。  </p>
@@ -1681,14 +1807,14 @@ tar  –xf  home.tar  install.log  </code></pre></div></li>
 按Enter键显示下一行内容；按空格键显示下一屏的内容：按q键，则退出more命令。<br>
 less 命令和more命令唯一的不同是more命令只能向后翻页，而less命令可以向前向后翻页。</p>
 
-<h2 id="toc_126">tail</h2>
+<h2 id="toc_128">tail</h2>
 
 <p>格式：tail  [选项]  文件<br>
 功能：显示文本文件的结尾部分，默认显示文件的最后10行。<br>
 主要选项说明：<br>
 -n  数字（number）指定显示的行数  </p>
 
-<h2 id="toc_127">mam</h2>
+<h2 id="toc_129">mam</h2>
 
 <p>格式：man  命令名<br>
 功能：显示指定命令的手册页帮助信息。</p>
@@ -1696,20 +1822,20 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 <p><strong>注：</strong><br>
 屏幕显示出该命令在Shell手册页的第一屏帮助信息，用户可使用上下方向键、PgDn、PgUp键前后翻阅帮助信息，按q键则退出man命令。</p>
 
-<h2 id="toc_128">&ndash;help选项</h2>
+<h2 id="toc_130">&ndash;help选项</h2>
 
 <p>格式：命令名  &ndash;help<br>
 功能：显示指定命令的帮助信息。<br>
 使用&ndash;help选项也可获取命令的的帮助信息，但不是所有的命令都有此选项。help选项提供的帮助信息多为中文。</p>
 
-<h2 id="toc_129">wc</h2>
+<h2 id="toc_131">wc</h2>
 
 <p>格式：wc  [选项]  文件<br>
 功能：显示文本文件的行数、字数和字符数。<br>
 主要选项说明：-c（character）、-l（line）<br>
                             -w（word），默认=clw</p>
 
-<h2 id="toc_130">Shell命令的通配符</h2>
+<h2 id="toc_132">Shell命令的通配符</h2>
 
 <ol>
 <li>通配符“<em>”<br>
@@ -1724,7 +1850,7 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 <li>“*”、“?” 只在[ ]外起特殊作用，“！”、“-”只在[ ]内起特殊作用。</li>
 </ol>
 
-<h2 id="toc_131">输入输出重定向（输出）</h2>
+<h2 id="toc_133">输入输出重定向（输出）</h2>
 
 <p>Linux的标准输入是指键盘，标准输出和标准错误输出均是屏幕。    </p>
 
@@ -1734,7 +1860,7 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 功能与输出重定向基本相同，不同的之处在于：附加输出重定向将输出内容添加在原来文件已有内容的后面，而不会覆盖其内容。Bash通过符号“&gt;&gt;”来实现。</li>
 </ol>
 
-<h2 id="toc_132">创建和合并文本文件</h2>
+<h2 id="toc_134">创建和合并文本文件</h2>
 
 <ol>
 <li>创建<br>
@@ -1747,9 +1873,9 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 举例：cat  f1  f2  &gt;  f3<br></li>
 </ol>
 
-<h2 id="toc_133">输入输出重定向（错误）</h2>
+<h2 id="toc_135">输入输出重定向（错误）</h2>
 
-<h3 id="toc_134">输出重定向</h3>
+<h3 id="toc_136">输出重定向</h3>
 
 <p>Shell中标准输出与错误输出是两个独立的操作。<br>
 程序的执行结果显示在屏幕上，而错误信息重定向到指定文件，使用“2&gt;”符号。<br>
@@ -1760,7 +1886,7 @@ less 命令和more命令唯一的不同是more命令只能向后翻页，而less
 <div><pre><code class="language-bash">ls /temp  
 ls /temp&gt;err</code></pre></div>
 
-<h3 id="toc_135">输入重定向</h3>
+<h3 id="toc_137">输入重定向</h3>
 
 <p>不从标准输入（键盘）读入数据，而是从文件读入数据，用“&lt;”符号来实现。<br>
 因为大多数的命令都以参数的形式在命令行上指定输入文件，所以输入重定向并不常使用。<br>
@@ -1770,7 +1896,7 @@ ls /temp&gt;err</code></pre></div>
 
 <div><pre><code class="language-bash"> newusers &lt; stu.txt</code></pre></div>
 
-<h2 id="toc_136">history</h2>
+<h2 id="toc_138">history</h2>
 
 <p>每个用户在自己的主目录下都有一个名为.bash_history的隐藏文件，保存（退出登入时）曾执行过的Shell命令。Bash默认最多保存1000。
 用上下键，PgUp或PgDown键查找，按Enter再次执行或命令行进行编辑、修改后再执行。   </p>
@@ -1802,7 +1928,7 @@ ls /temp&gt;err</code></pre></div>
 !!
 </code></p>
 
-<h2 id="toc_137">别名</h2>
+<h2 id="toc_139">别名</h2>
 
 <p>别名是按照Shell命令的标准格式所写的命令行的缩写<br>
 格式：</p>
